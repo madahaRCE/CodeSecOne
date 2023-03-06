@@ -14,11 +14,11 @@
     </resultMap>
 
     <!-- id的值必须和数据处理层的接口名一致 -->
-    <select id="orderBy" resultType="com.madaha.codesecone.entity.User">
-        select *
-        from users
-        order by ${field} ${sort}
-    </select>
+<!--    <select id="orderBy" resultType="com.madaha.codesecone.entity.User">-->
+<!--        select *-->
+<!--        from users-->
+<!--        order by ${field} ${sort}-->
+<!--    </select>-->
 
 
 </mapper>
