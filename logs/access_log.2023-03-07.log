@@ -1,0 +1,8 @@
+127.0.0.1 - - [07/Mar/2023:00:31:16 +0800] "GET /RCE/Runtime/val?cmd=45689 HTTP/1.1" 200 5
+127.0.0.1 - - [07/Mar/2023:00:31:20 +0800] "GET /RCE/Runtime/val?cmd=4568456165 HTTP/1.1" 200 10
+127.0.0.1 - - [07/Mar/2023:00:47:02 +0800] "GET /RCE/Runtime/val?cmd=WHOAMI HTTP/1.1" 200 26
+127.0.0.1 - - [07/Mar/2023:00:54:39 +0800] "GET /SQLI/MyBatis/vul/id/1 HTTP/1.1" 404 275
+127.0.0.1 - - [07/Mar/2023:00:54:59 +0800] "GET /SQLI/MyBatis/vul/1 HTTP/1.1" 404 275
+127.0.0.1 - - [07/Mar/2023:00:55:19 +0800] "GET /SQLI/MyBatis/vul/id/1 HTTP/1.1" 200 55
+127.0.0.1 - - [07/Mar/2023:00:55:41 +0800] "GET /SQLI/MyBatis/vul/id/1'%20and%201=1%20 HTTP/1.1" 500 287
+127.0.0.1 - - [07/Mar/2023:00:55:58 +0800] "GET /SQLI/MyBatis/vul/id/1%20and%201=1%20 HTTP/1.1" 200 55
