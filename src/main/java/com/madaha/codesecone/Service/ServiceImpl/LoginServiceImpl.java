@@ -10,12 +10,14 @@ public class LoginServiceImpl implements LoginService {
     @Override
     public User loginService(String uname, String password) {
 
-        //验证码 验证
+        //验证码验证 CaptchaUtil
 
-        //账号密码验证
+
+        //账号密码验证，并创建 JWT Token
+
+
 
         //返回视图
-
         return null;
     }
 

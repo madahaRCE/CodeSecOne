@@ -24,7 +24,7 @@ public class Login {
     @RequestMapping("/index/test")
     public String test(){
 
-        return "直接放json数据";
+        return "测试，直接返回 字符串对象 的数据";
     }
 
 }

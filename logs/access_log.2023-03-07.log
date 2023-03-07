@@ -45,3 +45,6 @@
 127.0.0.1 - - [07/Mar/2023:11:37:41 +0800] "GET /index HTTP/1.1" 200 180
 127.0.0.1 - - [07/Mar/2023:11:37:48 +0800] "GET /index/test HTTP/1.1" 200 19
 127.0.0.1 - - [07/Mar/2023:11:37:52 +0800] "GET /login HTTP/1.1" 200 177
+127.0.0.1 - - [07/Mar/2023:20:43:25 +0800] "GET /RCE/Runtime/val?cmd=whoami HTTP/1.1" 200 26
+127.0.0.1 - - [07/Mar/2023:20:43:53 +0800] "GET /RCE/Runtime/val?cmd=whoami HTTP/1.1" 200 26
+127.0.0.1 - - [07/Mar/2023:20:48:05 +0800] "GET /RCE/Runtime/val?cmd=whoami HTTP/1.1" 200 26
