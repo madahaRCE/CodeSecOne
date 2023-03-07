@@ -23,12 +23,13 @@
     <dependencies>
 
         <!-- thymeleaf 模板 -->
+        <!--SpringBoot 集成 Thymeleaf 的起步依赖-->
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-thymeleaf</artifactId>
         </dependency>
 
-        <!-- spring boot MVC -->
+        <!--SpringBoot 开发 web 项目的起步依赖-->
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-web</artifactId>
@@ -42,7 +43,7 @@
             <version>8.0.28</version>
         </dependency>
 
-        <!-- jdbc -->
+        <!-- jdbc 依赖 -->
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-jdbc</artifactId>
