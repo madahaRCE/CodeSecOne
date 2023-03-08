@@ -15,9 +15,9 @@ public class LoginHandlerInterceptor implements HandlerInterceptor {
 
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
-        // 测试：标注一下，拦截器运行了
-        System.out.println("Interceptor preHandler method is running !");
-
+//        // 测试：标注一下，拦截器运行了
+//        System.out.println("Interceptor preHandler method is running !");
+//
 //        /**
 //         * 设置断点调试测试：
 //         * 先进入 WebMvcConfigurer接口 的 addInterceptors() 方法；
@@ -31,10 +31,11 @@ public class LoginHandlerInterceptor implements HandlerInterceptor {
 //        System.out.println("55555");
 
 
-        /**
-         * 获取登录session对象，并进行判断是否已登录。
-         * 注意：只有添加了具体实现，才能够进行拦截。
-         */
+
+//        /**
+//         * 获取登录session对象，并进行判断是否已登录。
+//         * 注意：只有添加了具体实现，才能够进行拦截。
+//         */
 //        Object session = request.getSession().getAttribute("LoginUser");
 //        if (session == null){
 //            request.setAttribute("msg","请先登录");
@@ -43,6 +44,7 @@ public class LoginHandlerInterceptor implements HandlerInterceptor {
 //        }else {
 //            return true;
 //        }
+
 
 
         // 如果没有具体实现，仍需要return返回结果，否则就阻断了。
