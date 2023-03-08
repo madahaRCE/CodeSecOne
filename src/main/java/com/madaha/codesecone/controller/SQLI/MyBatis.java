@@ -1,4 +1,4 @@
-package com.madaha.codesecone.controller.SQL;
+package com.madaha.codesecone.controller.SQLI;
 
 import com.madaha.codesecone.entity.User;
 import com.madaha.codesecone.mapper.UserMapper;
