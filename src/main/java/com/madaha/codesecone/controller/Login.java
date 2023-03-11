@@ -24,6 +24,7 @@ public class Login {
         return "redirect:/login";
     }
 
+    @RequestMapping("/captcha")
     public void captcha(){
         // 验证码处理
 
