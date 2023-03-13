@@ -14,20 +14,21 @@ public class LoginServiceImpl implements LoginService {
      * 注意：此处使用的是硬编码形式，并未进行数据库的 查询 操作。
      */
     @Override
-    public User loginService(String uname, String password) {
+    public boolean loginService(String username, String password) {
 
         // 硬编码，密码明文写死
         String user = "admin";
-        String pass = "admin";
+        String pass = "123456";
 
-        // 认证
-        if (true){
-
-        }else{
-
+        /**
+         * 登录认证：
+         * 1、此处使用了硬编码进行登录认证
+         * 2、正常是应该使用数据库用户名密码进行认证的，因为时间和技术原因，此处简略了。
+         */
+        if (user.equals(username) && pass.equals(password)){
+            return true;
         }
-
-        return null;
+        return false;
     }
 
 

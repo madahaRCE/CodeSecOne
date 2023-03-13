@@ -1,10 +1,22 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <title>default View</title>
 </head>
 <body>
-    <h1>默认index界面</h1>
+    <a style="font-size: 30px">默认index界面</a>
+
+    <a style="text-align: end; width: 100%"> Java Security</a>
+    <br><br><br>
+    <span >
+        <a th:if="${session.LoginUser} == null" th:href="@{/login}"> 登录 </a>
+        <a th:if="${session.LoginUser} != null" th:text="${session.LoginUser}"></a>
+        <a th:if="${session.LoginUser != null}" th:href="@{/user/logout}"> 注销 </a>
+    </span>
+
+
+
+
 </body>
 </html>

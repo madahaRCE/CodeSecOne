@@ -5,12 +5,12 @@ import com.madaha.codesecone.entity.User;
 public interface LoginService {
 
     /**
-     * 登录业务逻辑
-     * @param uname 账户名
-     * @param password 密码
+     * 用户名、密码 登录认证
+     * @param username
+     * @param password
      * @return
      */
-    User loginService(String uname, String password);
+    boolean loginService(String username, String password);
 
 
     /**

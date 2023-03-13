@@ -27,28 +27,23 @@ public class LoginHandlerInterceptor implements HandlerInterceptor {
 //        System.out.println("1");
 //        System.out.println("22");
 //        System.out.println("333");
-//        System.out.println("4444");
-//        System.out.println("55555");
 
 
+        /**
+         * 获取登录session对象，并进行判断是否已登录。
+         * 注意：只有添加了具体实现，才能够进行拦截。
+         */
+        Object session = request.getSession().getAttribute("LoginUser");
+        if (session == null){
+            request.setAttribute("msg","请先登录~~");
+            request.getRequestDispatcher("/login").forward(request, response);
+            return false;
+        }else {
+            return true;
+        }
 
-//        /**
-//         * 获取登录session对象，并进行判断是否已登录。
-//         * 注意：只有添加了具体实现，才能够进行拦截。
-//         */
-//        Object session = request.getSession().getAttribute("LoginUser");
-//        if (session == null){
-//            request.setAttribute("msg","请先登录");
-//            request.getRequestDispatcher("/login").forward(request, response);
-//            return false;
-//        }else {
-//            return true;
-//        }
-
-
-
-        // 如果没有具体实现，仍需要return返回结果，否则就阻断了。
-        return true;
+//        // 如果没有具体实现，仍需要return返回结果，否则就阻断了。
+//        return true;
     }
 
     @Override

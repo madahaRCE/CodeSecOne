@@ -1,11 +1,56 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <title>Login 登录认证</title>
 </head>
 <body>
-    <h1>登录认证</h1>
+    <h3 align="center">
+        <span style="color: #938dff">登录认证页面</span>
+    </h3>
+    <br>
 
+    <div style="width: 300px; margin: auto">
+        <form th:action="@{/user/login}" method="post">
+            <div align="center">
+                <!-- img属性要按照以下方式填写，src="/img/dog.png" ，因为static滤镜thymeleaf能够自动获取！-->
+                <img src="/img/dog.png" height="150" width="165" alt="手动狗头"/><br>
+                <span style="font-size: 33px" >Java 漏洞测试平台</span>
+                <!--/*@thymesVar id="msg" type=""*/-->
+                <!-- 此处的 ${msg} 是通过 “org.springframework.ui:Model” 接口，从后端视图返回的。  -->
+                <p th:text="${msg}" style="color: #ff1e21"></p>
+            </div>
+
+            <div align="left">
+                <!-- requiresd 属性，规定必需在提交表单之前填写输入字段-->
+                <input type="text" name="username" placeholder="用户名" required="" style="width: 100%; height: 32px">
+            </div> <br>
+            <div>
+                <input type="password" name="password" placeholder="密码" required="" style="width: 100%; height: 32px">
+            </div> <br>
+
+            <div>
+                <input type="text" name="captcha" placeholder="验证码" style="width: 60%; height: 30px" align="left">
+                <!-- 使用 onclick="this.src='/captcha?id='+Math.random()" 可以动态的请求验证码，并生成新的验证码返回。-->
+                <!-- 注意：
+                        1、每提交一次form表单，验证码即会被更新一次；
+                        2、每点击一下验证码图片，验证码即也会被更新一次；
+                -->
+                <img src="/captcha" style="width: 35%; height: 50px" onclick="this.src='/captcha?id='+Math.random()" alt="获取失败！">
+            </div> <br>
+
+            <div>
+                <label>
+                    <!-- 此处功能暂未实现 -->
+                    <input type="checkbox" value="remember-me"> Remember Me
+                </label>
+            </div> <br> <br>
+
+            <div align="center">
+                <!-- 表单提交 -->
+                <button type="submit" style="font-size: 20px">登录</button>
+            </div>
+        </form>
+    </div>
 </body>
 </html>
