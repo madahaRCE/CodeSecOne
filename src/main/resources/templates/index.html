@@ -5,15 +5,37 @@
     <title>default View</title>
 </head>
 <body>
-    <a style="font-size: 30px">默认index界面</a>
+    <div>
+        <ul style="list-style: none; width: 100%; overflow: hidden">
+            <li style="float: left; line-height: 62px; margin: 0 10px">
+                <a style="font-size: 20px"> 默认index界面:"/index" </a>
+            </li>
+            <li style="float: left; line-height: 62px; margin: 0 470px">
+                <a style="text-align: end; width: 100%; font-size: 30px"> Java Security</a>
+            </li>
+            <li style="float: left; line-height: 62px; margin: 0 100px; font-size: 20px">
+                <a th:if="${session.LoginUser} == null" th:href="@{/login}"> 登录 </a>
+                <a th:if="${session.LoginUser} != null" th:text="${session.LoginUser}"></a>
+                <a th:if="${session.LoginUser != null}" th:href="@{/user/logout}"> 注销 </a>
+            </li>
+        </ul>
+    </div>
 
-    <a style="text-align: end; width: 100%"> Java Security</a>
-    <br><br><br>
-    <span >
-        <a th:if="${session.LoginUser} == null" th:href="@{/login}"> 登录 </a>
-        <a th:if="${session.LoginUser} != null" th:text="${session.LoginUser}"></a>
-        <a th:if="${session.LoginUser != null}" th:href="@{/user/logout}"> 注销 </a>
-    </span>
+    <br>
+
+    <div>
+        <li style="float: left; line-height: 30px; width: 300px">
+            <a style="font-size: 20px" th:href="@{/ip/proxy}"> proxy (IP_Forge) </a> <br>
+        </li>
+        <li style="float: left; line-height: 30px; width: 300px">
+            <a style="font-size: 20px" th:href="@{/}"> 12313 </a>
+        </li>
+        <li style="float: left; line-height: 30px; width: 230px">
+            <a style="font-size: 20px"> 默认index界面 /index </a>
+        </li>
+
+    </div>
+
 
 
 

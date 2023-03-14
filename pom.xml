@@ -78,13 +78,14 @@
             4、bcrypt 和其他对称或非对称加密方式不同的是，不是直接解密得到明文，也不是二次加密比较密文，而是把明文和存储的密文一块运算得到另一个密文，如果这两个密文相同则验证成功。
         -->
         <!--  该组件此处的用户登录认证并未使用，待未来哪一天再进行实现吧 -->
-        <dependency>
-            <groupId>org.mindrot</groupId>
-            <artifactId>jbcrypt</artifactId>
-            <version>0.4</version>
-        </dependency>
+<!--        <dependency>-->
+<!--            <groupId>org.mindrot</groupId>-->
+<!--            <artifactId>jbcrypt</artifactId>-->
+<!--            <version>0.4</version>-->
+<!--        </dependency>-->
 
-        <!-- 数据库连接池：
+        <!-- 数据库连接池c3p0的依赖 -->
+        <!--
             1、特别是c3p0提供了一些有用的服务：
                 一个类，它使传统的基于DriverManager的JDBC驱动程序适应最新的javax.sql.DataSource方案，以获取数据库连接。
                 DataSources后面的Connection和PreparedStatement的透明池可以“包装”传统驱动程序或任意非池化DataSources。
@@ -93,12 +94,25 @@
                 检入池中的Connections和Statements时，会仔细清理Statement和ResultSet，以防止客户端使用仅清理其Connections的惰性但常见的资源管理策略时资源耗尽。
         -->
         <!--  该组件此处的并未使用，待未来哪一天再进行实现吧 -->
-        <dependency>
-            <groupId>com.mchange</groupId>
-            <artifactId>c3p0</artifactId>
-            <version>0.9.5.2</version>
-        </dependency>
+<!--        <dependency>-->
+<!--            <groupId>com.mchange</groupId>-->
+<!--            <artifactId>c3p0</artifactId>-->
+<!--            <version>0.9.5.2</version>-->
+<!--        </dependency>-->
 
+        <!-- 继续，添加依赖 -->
+        <!-- 由于标准的Java库无法提供用于操纵其核心类的足够方法。Apache Commons Lang提供了这些额外的方法工具。
+            Lang为java.lang API提供了许多帮助程序实用程序，特别是字符串操作方法，基本数值方法，对象反射，并发，创建和序列化以及系统属性。
+            此外，它还包含对java.util.Date的基本增强，以及一系列专用于构建方法的实用程序，例如：hashCode，toString和equals。
+
+            常用类：
+                常用字符串（StringUtils）、随机数生成类（RandomStringUtils）、数字类NumberUtils、数组类 ArrayUtils、日期类DateUtils 等等。
+        -->
+        <dependency>
+            <groupId>commons-lang</groupId>
+            <artifactId>commons-lang</artifactId>
+            <version>2.4</version>
+        </dependency>
 
 
 
