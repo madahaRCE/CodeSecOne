@@ -49,6 +49,8 @@ public class Login {
          * 1、用户名、密码 登录验证
          * 2、创建Cookie对象，加入到response对象中，返回前段浏览器；
          * 3、给session对象设置“key-value”，返回前端浏览器；
+         *
+         * 注意：此处验证码逻辑漏洞绕过，后端服务 未进行验证码更新；
          */
         if(loginService.loginService(username, password)) {
             /**
