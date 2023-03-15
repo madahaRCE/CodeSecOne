@@ -1,4 +1,4 @@
-package com.madaha.codesecone.controller.yaml;
+package com.madaha.codesecone.controller.rce;
 
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;

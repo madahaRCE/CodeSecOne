@@ -70,6 +70,7 @@
             <version>1.6.2</version>
         </dependency>
 
+
         <!--  jbcrypt 是 bcrypt 加密工具的 java 实现。 -->
         <!--
             1、用 jbcrypt 对同一个明文加密后因为 salt 一般不同，加密后的密文一般不同，且bcrypt 是不可逆的加密算法（使用的是Blowfish加密算法），无法通过解密密文得到明文。
@@ -84,23 +85,7 @@
 <!--            <version>0.4</version>-->
 <!--        </dependency>-->
 
-        <!-- 数据库连接池c3p0的依赖 -->
-        <!--
-            1、特别是c3p0提供了一些有用的服务：
-                一个类，它使传统的基于DriverManager的JDBC驱动程序适应最新的javax.sql.DataSource方案，以获取数据库连接。
-                DataSources后面的Connection和PreparedStatement的透明池可以“包装”传统驱动程序或任意非池化DataSources。
-            2、该库尽力使细节正确：
-                c3p0数据源既可引用也可序列化，因此适合绑定到各种基于JNDI的命名服务。
-                检入池中的Connections和Statements时，会仔细清理Statement和ResultSet，以防止客户端使用仅清理其Connections的惰性但常见的资源管理策略时资源耗尽。
-        -->
-        <!--  该组件此处的并未使用，待未来哪一天再进行实现吧 -->
-<!--        <dependency>-->
-<!--            <groupId>com.mchange</groupId>-->
-<!--            <artifactId>c3p0</artifactId>-->
-<!--            <version>0.9.5.2</version>-->
-<!--        </dependency>-->
 
-        <!-- 继续，添加依赖 -->
         <!-- 由于标准的Java库无法提供用于操纵其核心类的足够方法。Apache Commons Lang提供了这些额外的方法工具。
             Lang为java.lang API提供了许多帮助程序实用程序，特别是字符串操作方法，基本数值方法，对象反射，并发，创建和序列化以及系统属性。
             此外，它还包含对java.util.Date的基本增强，以及一系列专用于构建方法的实用程序，例如：hashCode，toString和equals。
@@ -114,7 +99,13 @@
             <version>2.4</version>
         </dependency>
 
-
+        <!-- 引入groovy 来执行命令 -->
+        <dependency>
+            <groupId>org.codehaus.groovy</groupId>
+            <artifactId>groovy-all</artifactId>
+            <version>2.5.6</version>
+            <type>pom</type>
+        </dependency>
 
 
 
