@@ -44,4 +44,18 @@
 ![img_10.png](img_10.png)
 
 
+woc，这大晚上的左思右想睡不着，拿起手机到github上看一下吧，原来问题出在这里了
+![img_11.png](img_11.png)
+
+
+我哭了！giaogiao，怎还弹不出来。
+ccc，原来是python起的web服务目录错了。。。
+
+
+tnnd，终于弹出来了。
+![img_12.png](img_12.png)
+
+
+话不多说，2点了。睡觉睡觉。。
+
 
