@@ -107,7 +107,12 @@
             <type>pom</type>
         </dependency>
 
-
+        <!-- org.apache.http.conn.util.InetAddressUtils是Apache HttpClient库的一部分，它提供了一些关于IP地址的实用方法。 -->
+        <dependency>
+            <groupId>org.apache.httpcomponents</groupId>
+            <artifactId>httpclient</artifactId>
+            <version>4.5.12</version>
+        </dependency>
 
 
 

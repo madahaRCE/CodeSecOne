@@ -1,5 +1,6 @@
 package com.madaha.codesecone.controller.rce;
 
+import com.madaha.codesecone.util.Security;
 import org.apache.commons.lang.text.StrBuilder;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -45,10 +46,40 @@ public class ProcessBuilderVul {
         return stringBuilder.toString();
     }
 
+    /**
+     * @poc http://127.0.0.1:28888/RCE/ProcessBuilder/safe?filepath=%20c%3A%5Ctmp%26%26calc
+     * @param filepath
+     * @return
+     * @throws IOException
+     */
+    @RequestMapping("/safe")
     public static String processBuliderSafe(String filepath) throws IOException{
 
-        if (!Security.checkOS(filepath)){
+        if (!Security.chrckOs(filepath)){
 
+            // String[] cmdList = {"sh", "-c", "ls -l" + filepath};
+            String[] cmdList = {"cmd", "/c", "dir" + filepath};
+
+            ProcessBuilder processBuilder = new ProcessBuilder(cmdList);
+            processBuilder.redirectErrorStream(true);
+
+            Process process = processBuilder.start();
+
+            InputStream inputStream = process.getInputStream();
+            InputStreamReader inputStreamReader = new InputStreamReader(inputStream);
+            BufferedReader bufferedReader = new BufferedReader(inputStreamReader);
+
+            String line;
+            StringBuilder output = new StringBuilder();
+
+            while ((line = bufferedReader.readLine()) != null){
+                output.append(line).append("\n");
+            }
+
+            return output.toString();
+
+        }else {
+            return "监测到非法命令注入";
         }
     }
 }
