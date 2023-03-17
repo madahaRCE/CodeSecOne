@@ -5,9 +5,11 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.util.StringUtils;
 
+import java.io.UnsupportedEncodingException;
 import java.net.InetAddress;
 import java.net.URI;
 import java.net.URISyntaxException;
+import java.net.URLDecoder;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
@@ -153,6 +155,36 @@ public class Security {
      */
     public static boolean checkTraversal(String content){
         return content.contains("..") || content.contains("/");
+    }
+
+    /**
+     * Filter file path to prevent(防止) path traversal vulns.
+     *
+     * @param filepath file path
+     * @return illegal(不合法的) file path return null
+     */
+    public static String pathFilter(String filepath){
+        String temp = filepath;
+
+        // use while to sovle multi urlencode
+        // 判断是否存在URL编码，如果有就解码
+        while (temp.indexOf('%') != -1){
+            try{
+                temp = URLDecoder.decode(temp, "utf-8");
+            }catch (UnsupportedEncodingException e){
+                log.info("Unsupported Encoding Exception: " + filepath);
+                return null;
+            }catch (Exception e){
+                log.info(e.toString());
+                return null;
+            }
+        }
+
+        if (temp.contains("..") || temp.charAt(0) == '/'){
+            return null;
+        }
+
+        return filepath;
     }
 
     /**

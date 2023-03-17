@@ -114,6 +114,16 @@
             <version>4.5.12</version>
         </dependency>
 
+        <!-- 主要分为工具类、尾端类、行迭代器、文件过滤器、文件比较器和扩展流。
+            工具类：包括FileUtils、IOUtils、FilenameUtils和FileSystemUtils，前三者的方法并没有多大的区别，只是操作的对象不同.
+            故名思议：FileUtils主要操作File类，IOUtils主要操作IO流，FilenameUtils则是操作文件名，FileSystemUtils包含了一些JDK没有提供的用于访问文件系统的实用方法。
+         -->
+        <dependency>
+            <groupId>commons-io</groupId>
+            <artifactId>commons-io</artifactId>
+            <version>2.11.0</version>
+        </dependency>
+
 
 
 
