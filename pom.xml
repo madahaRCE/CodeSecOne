@@ -124,6 +124,21 @@
             <version>2.11.0</version>
         </dependency>
 
+        <!-- 用于，生成uuid -->
+        <dependency>
+            <groupId>com.fasterxml.uuid</groupId>
+            <artifactId>java-uuid-generator</artifactId>
+            <version>3.1.4</version>
+        </dependency>
+
+
+
+
+
+
+
+
+
 
 
 

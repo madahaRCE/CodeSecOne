@@ -1,5 +1,6 @@
 package com.madaha.codesecone.util;
 
+import org.apache.commons.lang.text.StrBuilder;
 import org.apache.http.conn.util.InetAddressUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -221,6 +222,30 @@ public class Security {
         }
 
         return false;
+    }
+
+    /**
+     * 将非 <code>0-9a-1/-.<code/> 的字符替换为空
+     *
+     * @param str 字符串
+     * @return 被过滤的字符串
+     */
+    public static String replaceSpecialStr(String str){
+        StrBuilder strBuilder = new StrBuilder();
+
+        str = str.toLowerCase();
+        for (int i = 0; i < str.length(); i++){
+            char ch = str.charAt(i);
+
+            if(ch >= 48 && ch <= 57){     // 如果是0-9
+                strBuilder.append(ch);
+            }else if (ch >= 97 && ch <= 122){   // 如果是a-z
+                strBuilder.append(ch);
+            }else if (ch == '/' || ch == '.' || ch == '-'){
+                strBuilder.append(ch);
+            }
+        }
+        return strBuilder.toString();
     }
 
 }

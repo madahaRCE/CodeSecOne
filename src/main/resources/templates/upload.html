@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Upload 文件上传</title>
+</head>
+<body>
+
+    <h1>文件上传</h1>
+    <br><br>
+
+
+    <h3> 漏洞代码 </h3>
+    <form method="POST" action="/UPLOAD/uploadVul" enctype="multipart/form-data">
+        <input type="file" name="file" />
+        <input type="submit" value="上传" />
+    </form>
+    <br><br>
+
+
+    <h3> 安全代码 - 白名单后缀 </h3>
+    <form method="POST" action="/UPLOAD/uploadSafe" enctype="multipart/form-data">
+        <input type="file" name="file" />
+        <input type="submit" value="上传" />
+    </form>
+    <br><br>
+
+
+    <h3> 安全代码 - 白名单后缀 + 黑名单MIME类型 + 验证文件内容是否图片 </h3>
+    <form method="POST" action="/UPLOAD/uploadSafe++" enctype="multipart/form-data">
+        <input type="file" name="file" />
+        <input type="submit" value="上传" />
+    </form>
+    <br><br><br><br><br>
+
+
+    <!--/*@thymesVar id="message" type=""*/-->
+    <div th:if="${message}">
+        <span th:text="${message}" style="color: #ff1e21" />
+        <hr>
+    </div>
+
+
+</body>
+</html>
