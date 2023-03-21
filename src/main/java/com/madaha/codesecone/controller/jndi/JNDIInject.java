@@ -5,9 +5,13 @@ import org.slf4j.LoggerFactory;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.util.HtmlUtils;
 
 import javax.naming.Context;
 import javax.naming.InitialContext;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 
 @RestController
 @RequestMapping("/JNDI")
@@ -43,9 +47,41 @@ public class JNDIInject {
         return "JNDI注入";
     }
 
+    @GetMapping("/safe1")
     public String safe(String content){
+        // 使用正则表达式限制参数的值。当且仅当，此字符串与给定的正则表达式匹配时 返回 true 。
+        // 如果正则匹配时 仅仅 包含 “\w（匹配字母、数字、下划线。等价于 [A-Za-z0-9_]）” 、 “.” 、 "-" 时返回true； 包含次字符之外的字符时，返回false。
+        if(content.matches("^[\\w\\.-]+$")){
+            try{
+                Context ctx = new InitialContext();
+                ctx.lookup(content);
+            }catch (Exception e){
+                log.warn("JND错误信息");
+            }
 
-        return "";
+            // 执行完上述调用后，返回页面请求内容 用html编码后返回。
+            return HtmlUtils.htmlEscape(content);
+        }else{
+            return "JNDI 正则拦截";
+        }
     }
 
+    @GetMapping("/safe2")
+    public String safe2(String content){
+        // 白名单过滤，匹配放行。
+        List<String> whiteList = Arrays.asList("java:comp/env/jdbc/mydb", "java:comp/env/mail/mymail");
+        if (whiteList.contains(content)){
+            try{
+                Context ctx = new InitialContext();
+                ctx.lookup(content);
+            }catch (Exception e){
+                log.warn("JNDI 错误消息");
+            }
+
+            // 执行完上述调用后，返回页面请求内容 用html编码后返回。
+            return HtmlUtils.htmlEscape(content);
+        }else {
+            return "JNDI 白名单拦截";
+        }
+    }
 }

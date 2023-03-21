@@ -25,7 +25,7 @@ public class Login {
      * 键值对中存储的 是在每次请求后都会响应变化的 token 。
      * 但是，由于token太麻烦，耽误太多时间了，这里直接自定义一个字符串
      */
-    //private static final String COOKIE_NAME = "JWT_TOKEN";
+//    private static final String COOKIE_NAME = "JWT_TOKEN";
 
     @Autowired
     LoginService loginService = new LoginServiceImpl();
@@ -45,26 +45,38 @@ public class Login {
             return "/login";
         }
 
+
         /**
-         * 1、用户名、密码 登录验证
-         * 2、创建Cookie对象，加入到response对象中，返回前段浏览器；
-         * 3、给session对象设置“key-value”，返回前端浏览器；
+         * 此处，仅是为了登录：
+         *      （1）创建登录session；
+         *      （2）创建cookie，或者是创建token存储再cookie中；
+         *      （3）注：此处的cookie，是为了其他功能进行客户端user验证用的。
          *
-         * 注意：此处验证码逻辑漏洞绕过，后端服务 未进行验证码更新；
+         * token是存储在客户端cookie中的凭证：
+         *      （1）每一次请求都需要携带 token，需要把 token 放到 HTTP 的 Header 里；
+         *      （2）基于 token 的用户认证是一种 “服务端无状态” 的认证方式，服务端不用存放 token 数据。用解析 token 的计算时间换取 session 的存储空间，从而减轻服务器的压力，减少频繁的查询数据库；（时间换空间！！！）
+         *      （3）token 完全由应用管理，所以它可以避开同源策略。
+         *
+         * 登录逻辑：
+         *      1、用户名、密码 登录验证
+         *      2、创建Cookie（token）对象，加入到response对象中，返回前段浏览器；
+         *      3、给session对象设置“key-value”，返回前端浏览器；唯一的 ”Session ID“ 记录唯一浏览器用户。
+         *
+         * 注意1：此处验证码逻辑漏洞绕过，后端登录服务，未对每次登录 进行验证码更新；
          */
         if(loginService.loginService(username, password)) {
+// -----------------------------------------------------------------------------------------------------------------
             /**
              * 创建JWT Token，将其添加到Cookie对象中。
-             * 由于穿件JWT Token太麻烦，我这里耽误了太多时间，故此处跳过。
+             * 由于创建JWT Token太麻烦，我这里耽误了太多时间，故此处暂且跳过。
              */
-            //String token = JwtUtils.generateToken(username);
-            //Cookie cookie = new Cookie(COOKIE_NAME, token);
+//            String token = JwtUtils.generateToken(username);
+//            Cookie cookie = new Cookie(COOKIE_NAME, token);
+
 
             /**
-             * HTTP Cookie（也叫 Web Cookie 或浏览器 Cookie）是服务器发送到用户浏览器并保存在本地的一小块数据。
-             * 浏览器会存储 cookie 并在下次向同一服务器再发起请求时携带并发送到服务器上。
-             * 通常，它用于告知服务端两个请求是否来自同一浏览器——如保持用户的登录状态。
-             * Cookie 使基于无状态的 HTTP 协议记录稳定的状态信息成为了可能。
+             * HTTP Cookie（也叫 Web Cookie 或浏览器 Cookie）是服务器发送到用户浏览器并保存在本地的一小块数据。浏览器会存储 cookie 并在下次向同一服务器再发起请求时携带并发送到服务器上。
+             * 通常，它用于告知服务端两个请求是否来自同一浏览器——如保持用户的登录状态。Cookie 使基于无状态的 HTTP 协议记录稳定的状态信息成为了可能。
              */
             Cookie cookie = new Cookie( "username", username);
             cookie.setHttpOnly(true);
@@ -72,13 +84,25 @@ public class Login {
             cookie.setPath("/");
             response.addCookie(cookie);         //设置cookie对象返回浏览器
 
+// -----------以上，横线包裹的部分 是为了创建cookie，主要目的是为了验证每次请求的客户端，是哪一个 userXXX -------------------------
+// -----------------------------------------------------------------------------------------------------------------
+
+
+
             /**
-             * 创建会话“key-value”对，只要浏览器不关闭，session对象就不会被销毁。
-             * 另一方面，是为了在登录拦截器处理类 “HandlerInterceptor” 中，对session的 “LoginUser” 进行验证；
-             * 当拦截去判断session对象不为null时，放行访问。
+             * 创建session：
+             *
+             * ○ 第一次访问时，服务器会创建一个新的session，并且把session的Id以cookie的形式发送给客户端浏览器。（session存储在服务端。）
+             * ○ 第二次访问时候，浏览器交出cookie，服务器找到对应的Session。
+             * ○ 当浏览器禁用了cookie后，用URL重写（后面带上一个类似cookie的东西）这种解决方案解决Session数据共享问题。
+             *
+             * 1、创建会话“key-value”对，只要浏览器不关闭，session对象就不会被销毁。（注意：是服务器上存活有效的session对象）
+             * 2、另一方面，是为了在登录拦截器处理类 “HandlerInterceptor” 中，对session的 “LoginUser” 进行验证；
+             * 3、当拦截去判断session对象不为null时，放行访问。
              */
             session.setAttribute("LoginUser", username);
 
+            // 以上严重通过后，返回默认页面。（验证码验证通过、cookie/token验证通过。）
             return "redirect:/index";
         }else {
             model.addAttribute("msg", "用户名或密码错误");
@@ -86,6 +110,12 @@ public class Login {
         }
     }
 
+    /**
+     *  客户端请求注销，销毁客户端当前使用的 session 对象；
+     *
+     * @param session
+     * @return
+     */
     @RequestMapping("/user/logout")
     public String logout(HttpSession session){
         //注销登录，作废 session 对象
