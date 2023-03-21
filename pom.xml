@@ -96,12 +96,11 @@
 <!--        </dependency>-->
 
 
-        <!-- 由于标准的Java库无法提供用于操纵其核心类的足够方法。Apache Commons Lang提供了这些额外的方法工具。
-            Lang为java.lang API提供了许多帮助程序实用程序，特别是字符串操作方法，基本数值方法，对象反射，并发，创建和序列化以及系统属性。
-            此外，它还包含对java.util.Date的基本增强，以及一系列专用于构建方法的实用程序，例如：hashCode，toString和equals。
-
-            常用类：
-                常用字符串（StringUtils）、随机数生成类（RandomStringUtils）、数字类NumberUtils、数组类 ArrayUtils、日期类DateUtils 等等。
+        <!--
+            1、由于标准的Java库无法提供用于操纵其核心类的足够方法。Apache Commons Lang提供了这些额外的方法工具。
+            2、Lang为java.lang API提供了许多帮助程序实用程序，特别是字符串操作方法，基本数值方法，对象反射，并发，创建和序列化以及系统属性。
+            3、此外，它还包含对java.util.Date的基本增强，以及一系列专用于构建方法的实用程序，例如：hashCode，toString和equals。
+            4、常用类：常用字符串（StringUtils）、随机数生成类（RandomStringUtils）、数字类NumberUtils、数组类 ArrayUtils、日期类DateUtils 等等。
         -->
         <dependency>
             <groupId>commons-lang</groupId>

