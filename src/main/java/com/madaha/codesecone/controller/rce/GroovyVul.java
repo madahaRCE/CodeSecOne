@@ -14,7 +14,7 @@ import java.util.List;
 public class GroovyVul {
 
     /**
-     * @poc http://127.0.0.1:8888/RCE/Groovy/vul?cmd="calc".execute()
+     * @poc http://127.0.0.1:28888/RCE/Groovy/vul?cmd="calc".execute()
      * @param cmd
      */
     @GetMapping("/vul")

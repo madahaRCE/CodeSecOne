@@ -146,6 +146,20 @@
             <artifactId>unboundid-ldapsdk</artifactId>
         </dependency>
 
+        <!-- Fastjson 1.2.24存在rce漏洞 -->
+        <dependency>
+            <groupId>com.alibaba</groupId>
+            <artifactId>fastjson</artifactId>
+            <version>1.2.41</version>
+        </dependency>
+
+        <!-- StringEscapeUtils.escapeXml10() 是 Apache Commons Lang 库中的一个方法，该方法会将字符串中的 &、<、>、' 和 " 转换为实体引用，以便安全地在 XML 文档中使用这些字符。 -->
+        <dependency>
+            <groupId>org.apache.commons</groupId>
+            <artifactId>commons-text</artifactId>
+            <version>1.9</version>
+        </dependency>
+
 
 
 
