@@ -160,6 +160,26 @@
             <version>1.9</version>
         </dependency>
 
+        <!-- 富文本过滤：采用jsoup做富文本过来 -->
+        <!-- org.jsoup.safety.Whitelist是个白名单, 定义了什么html元素或者属性可以通过, 而其他的所有内容都将被删除。
+             org.jsoup.safety.Cleaner是清理器，在创建Cleaner对象时告诉他白名单是什么，然后就可以用于请理危险元素和脚本了。
+         -->
+        <dependency>
+            <groupId>org.jsoup</groupId>
+            <artifactId>jsoup</artifactId>
+            <version>1.12.2</version>
+        </dependency>
+
+        <!-- 高版本会报错! -->
+        <!-- 注意：低版本，springboot直接起不来！！！! -->
+        <!-- ESAPI是owasp提供的一套API级别的web应用解决方案。简单的说，ESAPI就是为了编写出更加安全的代码而设计出来的一些API，方便使用者调用，从而方便的编写安全的代码 -->
+        <dependency>
+            <groupId>org.owasp.esapi</groupId>
+            <artifactId>esapi</artifactId>
+            <version>2.2.0.0</version>
+        </dependency>
+
+
 
 
 

@@ -1,6 +1,9 @@
 package com.madaha.codesecone.controller.sqli;
 
 import com.madaha.codesecone.util.Security;
+import org.owasp.esapi.ESAPI;
+import org.owasp.esapi.codecs.Codec;
+import org.owasp.esapi.codecs.OracleCodec;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
@@ -88,7 +91,7 @@ public class JDBC {
 
     /**
      * JDBC预编译：
-     *    采用预编译的方法，但没使用 ? 占位，此时进行预编译也无法组织SQL注入。
+     *    采用预编译的方法，但没使用 ? 占位，此时进行预编译也无法阻止SQL注入。
      *
      * @poc http://127.0.0.1:28888/SQLI/JDBC/vul2?id=2%20union%20select%201,2,user()--
      * @decode http://127.0.0.1:28888/SQLI/JDBC/vul2?id=2 union select 1,2,user()--
@@ -156,7 +159,10 @@ public class JDBC {
     }
 
 
+
     /**
+     * safe1：
+     *
      * JDBC预编译：
      *    采用预编译的方法，使用?占位，也叫参数化的SQL。
      *
@@ -242,17 +248,73 @@ public class JDBC {
     }
 
 
+    /**
+     * 采用ESAPI过滤：
+     *
+     * 解决办法找到了：
+     *     解决方法：将esapi.jar添加到项目之后，还要引入ESAPI.properties和validation.properties两个文件。
+     *     参考链接：https://blog.csdn.net/woqq773743943/article/details/65630452
+     *
+     * @param id
+     * @return
+     */
+    @GetMapping("/safe3")
+    public String safe3(String id){
+        StringBuilder result = new StringBuilder();
 
+        try {
+            Codec<Character> oracleCodec = new OracleCodec();
+            Class.forName("com.mysql.cj.jdbc.Driver");
+            Connection conn = DriverManager.getConnection(db_url, db_user, db_pass);
 
+            Statement stmt = conn.createStatement();
+            String sql = "select * from users where id = '" + ESAPI.encoder().encodeForSQL(oracleCodec, id) + "'";
+            log.info("[safe] 执行SQL语句： " + sql);
+            ResultSet rs = stmt.executeQuery(sql);
 
+            while (rs.next()){
+                String res_name = rs.getString("user");
+                String res_pass = rs.getString("pass");
+                String info = String.format("查询结果%n %s: %s%n", res_name, res_pass);
+                result.append(info);
+            }
 
+            rs.close();
+            stmt.close();
+            conn.close();
 
+            return result.toString();
 
+        } catch (Exception e){
+            return e.toString();
+        }
+    }
 
+    /**
+     * safe4:
+     *    强制数据类型
+     *
+     * 注：这里设置 Integer 类型，就是必须要使用此类型，避免字符修改产生sql注入问题。
+     *    从根上治病，最为有效！！！
+     *
+     *    payload（报错）:  http://127.0.0.1:28888/SQLI/JDBC/safe4?id=2%20union%20select%201,2,user()--+
+     *    @poc（能且仅能，用Integer）： http://127.0.0.1:28888/SQLI/JDBC/safe4?id=2
+     *
+     * @param id
+     * @return
+     */
+    @GetMapping("/safe4")
+    public Map<String, Object> safe4(Integer id) {
+        DriverManagerDataSource dataSource = new DriverManagerDataSource();
+        dataSource.setDriverClassName("com.mysql.cj.jdbc.Driver");
+        dataSource.setUrl(db_url);
+        dataSource.setUsername(db_user);
+        dataSource.setPassword(db_pass);
 
+        JdbcTemplate jdbcTemplate = new JdbcTemplate(dataSource);
 
+        String sql_vul = "select * from users where id = " + id;
 
-
-
-
+        return jdbcTemplate.queryForMap(sql_vul);
+    }
 }

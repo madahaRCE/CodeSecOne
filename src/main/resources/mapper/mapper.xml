@@ -4,21 +4,25 @@
 <!-- namespace:改mapper.xml映射文件的唯一标识并且必须和数据处理层的接口的路径相同 -->
 <mapper namespace="com.madaha.codesecone.mapper.UserMapper">
 
+
     <!--  id：返回的是所有对象的Map集合， type：每个对象是User类 -->
    <resultMap id="BaseResultMap" type="com.madaha.codesecone.entity.User">
-
-       <!-- id表示主键字段， property：User类中的属性， column：数据表中的字段， javaType：Use类中属性的类型 -->     <!-- (result表示对象的任何一个属性字段) -->
+       <!-- id表示主键字段， property：User类中的属性， column：数据表中的字段， javaType：Use类中属性的类型 -->
+       <!-- (result表示对象的任何一个属性字段) -->
         <id column="id" property="id" javaType="java.lang.Integer"/>
         <id column="user" property="username" javaType="String"/>
         <id column="pass" property="password" javaType="String"/>
     </resultMap>
 
+
     <!-- id的值必须和数据处理层的接口名一致 -->
-<!--    <select id="orderBy" resultType="com.madaha.codesecone.entity.User">-->
-<!--        select *-->
-<!--        from users-->
-<!--        order by ${field} ${sort}-->
-<!--    </select>-->
+    <select id="orderBy" resultType="com.madaha.codesecone.entity.User">
+        select *
+        from users
+        order by ${field} ${sort}
+    </select>
+
+
 
 
 </mapper>
