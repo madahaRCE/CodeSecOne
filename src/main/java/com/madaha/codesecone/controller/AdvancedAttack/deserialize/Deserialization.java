@@ -17,7 +17,8 @@ import org.springframework.web.bind.annotation.RestController;
  * </p>
  * <p>
  *     序列化方法：
- *        1. JDK(ObjectInputStream.readObject)
+ *        1. ObjectInputStream.readObject（JDK）
+ *        2. ObjectInputStream.readUnshared
  *        2. XMLDecode.readObject
  *        3. Yaml.load
  *        4. XStream.fromXML

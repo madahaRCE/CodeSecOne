@@ -13,6 +13,9 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
+/**
+ * JNDI注入攻击，其实就是相当于远程类加载，把远程的Class对象加载到本地执行，造成RCE。
+ */
 @RestController
 @RequestMapping("/JNDI")
 public class JNDIInject {
