@@ -36,7 +36,7 @@ public class UpLoad {
     protected final Logger log = LoggerFactory.getLogger(this.getClass());
 
     // Save the uploaded file this folder!
-    private static final String UPLOAD_FOLDER = System.getProperty("user.dir") + "/src/main/resources/static/file/";
+    private static final String UPLOAD_FOLDER = System.getProperty("user.dir") + "/src/main/resources/static/fileUpload/";
     private static String randomFilePath = "";
 
     // 请求 Controller 返回 html 视图。
