@@ -11,7 +11,8 @@ public class Client {
 
     public static void main(String[] args){
         try{
-            Registry registry = LocateRegistry.getRegistry("localhost");
+            // 端口参数，默认为1099，可不加。
+            Registry registry = LocateRegistry.getRegistry("localhost", 1099);
             Hello stub = (Hello) registry.lookup("Hello");
             String response = stub.sayHello();
 
