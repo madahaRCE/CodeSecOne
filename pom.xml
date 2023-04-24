@@ -161,9 +161,8 @@
         </dependency>
 
         <!-- 富文本过滤：采用jsoup做富文本过来 -->
-        <!-- org.jsoup.safety.Whitelist是个白名单, 定义了什么html元素或者属性可以通过, 而其他的所有内容都将被删除。
-             org.jsoup.safety.Cleaner是清理器，在创建Cleaner对象时告诉他白名单是什么，然后就可以用于请理危险元素和脚本了。
-         -->
+        <!-- org.jsoup.safety.Whitelist是个白名单, 定义了什么html元素或者属性可以通过, 而其他的所有内容都将被删除。 -->
+        <!-- org.jsoup.safety.Cleaner是清理器，在创建Cleaner对象时告诉他白名单是什么，然后就可以用于请理危险元素和脚本了。 -->
         <dependency>
             <groupId>org.jsoup</groupId>
             <artifactId>jsoup</artifactId>
@@ -179,6 +178,12 @@
             <version>2.2.0.0</version>
         </dependency>
 
+        <!-- 正则匹配：re2j 线性时间复杂度引擎（安全正则引擎） -->
+        <dependency>
+            <groupId>com.google.re2j</groupId>
+            <artifactId>re2j</artifactId>
+            <version>1.6</version>
+        </dependency>
 
 
 

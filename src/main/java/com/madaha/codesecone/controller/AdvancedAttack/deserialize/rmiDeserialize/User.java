@@ -1,14 +1,28 @@
 package com.madaha.codesecone.controller.AdvancedAttack.deserialize.rmiDeserialize;
 
+import java.rmi.Remote;
+import java.rmi.RemoteException;
+
 /**
  * 1. 服务端与客户端，攻击注册中心
  * 2. 注册中心，攻击客户端与服务端
  * 3. 客户端攻击服务端
  * 4. 服务端攻击客户端
  */
-public interface Hello {
+public interface User extends Remote {
 
+    String name(String name) throws RemoteException;
+    void say(String say) throws RemoteException;
+
+    // 发送Object
+    void dowork(Object work) throws RemoteException;
+
+    // 接收Object
+    Object getwork() throws RemoteException;
 }
+
+
+
 
 /**
  * 漏洞利用介绍：
