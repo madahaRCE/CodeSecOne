@@ -3,6 +3,15 @@ package com.madaha.codesecone.controller.AdvancedAttack.deserialize.rmiDeseriali
 import java.rmi.RemoteException;
 import java.rmi.server.UnicastRemoteObject;
 
+
+
+/**
+ * 注意：
+ *    （1）高版本的 jdk 会修复一些漏洞，所在进行CC1链分析前，需要对IDEA进行调试即安装未修复漏洞前的JDK版本。
+ *    （2）对于CC1链，JDK版本应该为8u71之前,这里用8u65即可。
+ */
+
+
 // 在 java.rmi.server.UnicastRemoteObject 的构造函数中将生 stub（存根） 和 skeleton（骨架）。
 public class UserImpl extends UnicastRemoteObject implements User{
     // 必须有一个显示的构造函数（否则报错），并且要抛出一个RemoteException异常

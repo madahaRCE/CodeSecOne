@@ -1,4 +1,4 @@
-package com.madaha.codesecone.controller.jndi;
+package com.madaha.codesecone.controller.jndi.RmiInject_Controller;
 
 import com.unboundid.ldap.listener.InMemoryDirectoryServer;
 import com.unboundid.ldap.listener.InMemoryDirectoryServerConfig;

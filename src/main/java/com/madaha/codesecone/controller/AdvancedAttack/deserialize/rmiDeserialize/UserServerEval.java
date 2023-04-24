@@ -1,4 +1,4 @@
 package com.madaha.codesecone.controller.AdvancedAttack.deserialize.rmiDeserialize;
 
-public class Client {
+public class UserServerEval {
 }
