@@ -185,6 +185,12 @@
             <version>1.6</version>
         </dependency>
 
+        <!-- xmlbeam xxe漏洞 -->
+        <dependency>
+            <groupId>org.xmlbeam</groupId>
+            <artifactId>xmlprojector</artifactId>
+            <version>1.4.14</version>
+        </dependency>
 
 
 
