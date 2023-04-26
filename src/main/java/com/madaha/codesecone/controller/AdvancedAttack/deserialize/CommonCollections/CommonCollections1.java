@@ -41,12 +41,12 @@ public class CommonCollections1 {
         };
 
         // java 1.8版本可用。
-        CC_LazyMap(transformers);
+        CC1_LazyMap(transformers);
     }
 
     // java8后无法使用：因为 AnnotationInvocationHandler 类被改写。
     // 而此时使用的是 java1.8，所以对 CC1 的利用链进行修改。
-    public static void CC_TransformedMap(Transformer[] transformers) throws Exception {
+    public static void CC1_TransformedMap(Transformer[] transformers) throws Exception {
         /*
             Gadget chain:
                 ObjectInputStream.readObject()
@@ -87,7 +87,7 @@ public class CommonCollections1 {
 
     // 因为 java 1.8 的 AnnotationInvocationHandler 类被改写
     // 所以，此处使用 TransformedMap 改用 LazyMap 实现。
-    public static void CC_LazyMap(Transformer[] transformers) throws Exception {
+    public static void CC1_LazyMap(Transformer[] transformers) throws Exception {
         /*
             Gadget chain:
                 ObjectInputStream.readObject()
