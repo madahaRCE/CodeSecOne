@@ -216,6 +216,13 @@
             <version>4.0</version>
         </dependency>
 
+        <!-- 在Maven项目中使用javassist库，需要在Maven项目的pom.xml文件中添加相应的依赖。 -->
+<!--        <dependency>-->
+<!--            <groupId>org.javassist</groupId>-->
+<!--            <artifactId>javassist</artifactId>-->
+<!--            <version>3.27.0-GA</version>-->
+<!--        </dependency>-->
+
 
 
 

