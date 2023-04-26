@@ -199,12 +199,22 @@
             <artifactId>commons-collections</artifactId>
             <version>3.2.1</version>
         </dependency>
-        <!-- 在 Apache Commons Collections3.2.1以下，才存在 “Commons Collections1” 的反序列化漏洞问题。 -->
+<!-- 在 Apache Commons Collections3.2.1以下，才存在 “Commons Collections1” 的反序列化漏洞问题。 -->
 <!--        <dependency>-->
 <!--            <groupId>commons-collections</groupId>-->
 <!--            <artifactId>commons-collections</artifactId>-->
 <!--            <version>3.2.2</version>-->
 <!--        </dependency>-->
+
+<!--        1、Apache Commons Collections官⽅在2015年底得知序列化相关的问题后，就在两个分⽀上同时发布了新的版本，4.1和3.2.2。-->
+<!--        2、在3.2.2中新版代码中增加了⼀个⽅法FunctorUtils#checkUnsafeSerialization ，⽤于检测反序列化是否安全。-->
+<!--           如果开发者没有设置全局配置org.apache.commons.collections.enableUnsafeSerialization=true ，即默认情况下会抛出异常。-->
+<!--        3、在4.1中，这⼏个危险Transformer类不再实现Serializable 接⼝，也就是说，他们⼏个彻底⽆法序列化和反序列化了。-->
+        <dependency>
+            <groupId>org.apache.commons</groupId>
+            <artifactId>commons-collections4</artifactId>
+            <version>4.0</version>
+        </dependency>
 
 
 
