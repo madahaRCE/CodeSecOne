@@ -85,8 +85,8 @@ public class UserServerEval_test_java8_CC1_fail {
 //                            )
 //                    )
 //            );
-
-            // Registry registry = LocateRegistry.createRegistry(3333);
+//
+//            // Registry registry = LocateRegistry.createRegistry(3333);
 //            Registry registry_remote = LocateRegistry.getRegistry("127.0.0.1", 1099);
 //            registry_remote.bind("HelloRegistry", evalObject);
 //

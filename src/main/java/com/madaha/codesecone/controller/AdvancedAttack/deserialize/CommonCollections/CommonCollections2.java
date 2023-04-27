@@ -77,12 +77,12 @@ public class CommonCollections2 {
         ObjectOutputStream oos = new ObjectOutputStream(barr);
         oos.writeObject(queue);
         oos.close();
-        System.out.println(barr);
-        System.out.println("-----------------------------------------------------------------------");
+        // System.out.println(barr);
+        // System.out.println("-----------------------------------------------------------------------");
 
         ObjectInputStream ois = new ObjectInputStream(new ByteArrayInputStream(barr.toByteArray()));
         Object o = (Object) ois.readObject();
-        System.out.println(o.toString());
+        // System.out.println(o.toString());
     }
 
     public static void CC2_TemplatesImpl() throws Exception{
@@ -108,12 +108,12 @@ public class CommonCollections2 {
         ObjectOutputStream oos = new ObjectOutputStream(barr);
         oos.writeObject(queue);
         oos.close();
-        System.out.println(barr);
-        System.out.println("-----------------------------------------------------------------------");
+        // System.out.println(barr);
+        // System.out.println("-----------------------------------------------------------------------");
 
         ObjectInputStream ois = new ObjectInputStream(new ByteArrayInputStream(barr.toByteArray()));
         Object o = (Object) ois.readObject();
-        System.out.println(o.toString());
+        // System.out.println(o.toString());
     }
 
 
