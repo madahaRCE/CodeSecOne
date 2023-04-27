@@ -19,8 +19,8 @@ import java.util.HashMap;
 import java.util.Map;
 
 
-// 测试失败
-public class UserServerEval_test_java8_CC1_fail {
+// 测试失败 1.8及以上，CC1不行。
+public class ToAttackRegistry_Server_test_java8_CC1_fail_Version {
 
     // 服务端与客户端攻击注册中心
     public void toRegistryEval() throws Exception{
@@ -117,7 +117,7 @@ public class UserServerEval_test_java8_CC1_fail {
 
 
     public static void main(String[] args) throws Exception{
-        UserServerEval_test_java8_CC1_fail eval = new UserServerEval_test_java8_CC1_fail();
+        ToAttackRegistry_Server_test_java8_CC1_fail_Version eval = new ToAttackRegistry_Server_test_java8_CC1_fail_Version();
         eval.toRegistryEval();
     }
 }
