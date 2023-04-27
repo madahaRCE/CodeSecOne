@@ -6,4 +6,5 @@ package com.madaha.codesecone.controller.BAC;
  *    2、垂直越权
  */
 public class OverPermission {
+
 }
