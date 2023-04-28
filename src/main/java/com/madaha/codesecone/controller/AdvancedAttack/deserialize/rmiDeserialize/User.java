@@ -18,7 +18,7 @@ public interface User extends Remote {
     void dowork(Object work) throws RemoteException;
 
     // 接收Object
-    Object getwork() throws RemoteException;
+    Object getwork() throws Exception;
 }
 
 
