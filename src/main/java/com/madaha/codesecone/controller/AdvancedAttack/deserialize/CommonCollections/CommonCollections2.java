@@ -73,6 +73,7 @@ public class CommonCollections2 {
         // field.set(faketransformerchain, transformers);
         Reflections.setFieldValue(faketransformerchain, "iTransformers", transformers);
 
+
         ByteArrayOutputStream barr = new ByteArrayOutputStream();
         ObjectOutputStream oos = new ObjectOutputStream(barr);
         oos.writeObject(queue);
