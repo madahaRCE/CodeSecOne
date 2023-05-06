@@ -7,6 +7,10 @@ import org.apache.commons.collections4.functors.ChainedTransformer;
 import org.apache.commons.collections4.functors.ConstantTransformer;
 import org.apache.commons.collections4.functors.InvokerTransformer;
 
+import java.io.ByteArrayInputStream;
+import java.io.ByteArrayOutputStream;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
 import java.rmi.RemoteException;
 import java.rmi.server.UnicastRemoteObject;
 import java.util.PriorityQueue;
@@ -22,7 +26,7 @@ import java.util.PriorityQueue;
 // 在 java.rmi.server.UnicastRemoteObject 的构造函数中将生 stub（存根） 和 skeleton（骨架）。
 public class UserImpl extends UnicastRemoteObject implements User{
     // 必须有一个显示的构造函数（否则报错），并且要抛出一个RemoteException异常
-    public UserImpl() throws RemoteException{
+    public UserImpl() throws Exception{
         super();
     }
 
