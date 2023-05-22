@@ -35,6 +35,7 @@ public class Login {
                         @RequestParam("captcha") String captcha, Model model, HttpSession session,
                         HttpServletRequest request, HttpServletResponse response){
 
+
         /**
          * 图片验证码验证：将前端form表单请求的“captcha”参数，与服务器上 验证码生成器存储的“captcha”验证码 进行验证。
          * 注意：服务端生成的验证码存储再session（会话）中，具体是怎存储的我没有弄明白，有哪位大佬懂的原理的，评论下 教教我。
@@ -46,10 +47,11 @@ public class Login {
         }
 
 
+
         /**
          * 此处，仅是为了登录：
          *      （1）创建登录session；
-         *      （2）创建cookie，或者是创建token存储再cookie中；
+         *      （2）创建cookie，或者是创建token存储再cookie中（例如：创建一个 jwt 形式的 token）；
          *      （3）注：此处的cookie，是为了其他功能进行客户端user验证用的。
          *
          * token是存储在客户端cookie中的凭证：
@@ -59,19 +61,18 @@ public class Login {
          *
          * 登录逻辑：
          *      1、用户名、密码 登录验证
-         *      2、创建Cookie（token）对象，加入到response对象中，返回前段浏览器；
+         *      2、创建Cookie（token）对象，加入到response对象中，返回到前端浏览器；
          *      3、给session对象设置“key-value”，返回前端浏览器；唯一的 ”Session ID“ 记录唯一浏览器用户。
          *
          * 注意1：此处验证码逻辑漏洞绕过，后端登录服务，未对每次登录 进行验证码更新；
          */
         if(loginService.loginService(username, password)) {
-// -----------------------------------------------------------------------------------------------------------------
             /**
              * 创建JWT Token，将其添加到Cookie对象中。
              * 由于创建JWT Token太麻烦，我这里耽误了太多时间，故此处暂且跳过。
              */
-//            String token = JwtUtils.generateToken(username);
-//            Cookie cookie = new Cookie(COOKIE_NAME, token);
+            String token = JwtUtils.generateToken(username);
+            Cookie cookie = new Cookie(COOKIE_NAME, token);
 
 
             /**
@@ -84,26 +85,24 @@ public class Login {
             cookie.setPath("/");
             response.addCookie(cookie);         //设置cookie对象返回浏览器
 
-// -----------以上，横线包裹的部分 是为了创建cookie，主要目的是为了验证每次请求的客户端，是哪一个 userXXX -------------------------
-// -----------------------------------------------------------------------------------------------------------------
-
-
 
             /**
-             * 创建session：
+             * 创建session过程与使用流程：
+             *      （1）第一次访问时，服务器会创建一个新的session，并且把session的Id以cookie的形式发送给客户端浏览器。（session存储在服务端。）
+             *      （2）第二次访问时候，浏览器交出cookie，服务器找到对应的Session。
+             *      （3）注：当浏览器禁用了cookie后，用URL重写（后面带上一个类似cookie的东西）这种解决方案解决Session数据共享问题。
              *
-             * ○ 第一次访问时，服务器会创建一个新的session，并且把session的Id以cookie的形式发送给客户端浏览器。（session存储在服务端。）
-             * ○ 第二次访问时候，浏览器交出cookie，服务器找到对应的Session。
-             * ○ 当浏览器禁用了cookie后，用URL重写（后面带上一个类似cookie的东西）这种解决方案解决Session数据共享问题。
-             *
-             * 1、创建会话“key-value”对，只要浏览器不关闭，session对象就不会被销毁。（注意：是服务器上存活有效的session对象）
-             * 2、另一方面，是为了在登录拦截器处理类 “HandlerInterceptor” 中，对session的 “LoginUser” 进行验证；
-             * 3、当拦截去判断session对象不为null时，放行访问。
+             * 声明：为什么创建session会话“key-value”对？
+             *      （1）创建session会话“key-value”对，只要浏览器不关闭，session对象就不会被销毁（注意：是服务器上存活的有效的session对象）；
+             *      （2）另一方面，是为了在登录拦截器处理类 “HandlerInterceptor” 中，对session的 “LoginUser” 进行验证；
+             *      （3）当拦截器判断session对象不为null时，放行访问。
              */
             session.setAttribute("LoginUser", username);
 
-            // 以上严重通过后，返回默认页面。（验证码验证通过、cookie/token验证通过。）
+
+            // 以上验证通过后，返回默认页面。（ [1]验证码验证通过;  [2]cookie/token验证通过。 ）
             return "redirect:/index";
+
         }else {
             model.addAttribute("msg", "用户名或密码错误");
             return "/login";

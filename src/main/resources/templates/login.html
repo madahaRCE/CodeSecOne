@@ -17,7 +17,7 @@
                 <img src="/img/dog.png" height="150" width="165" alt="手动狗头"/><br>
                 <span style="font-size: 33px" >Java 漏洞测试平台</span>
                 <!--/*@thymesVar id="msg" type=""*/-->
-                <!-- 此处的 ${msg} 是通过 “org.springframework.ui:Model” 接口，从后端视图返回的。  -->
+                <!-- 此处的 ${msg} 是通过 “org.springframework.ui:Model” 接口，从后端响应的“模型+视图”渲染后返回的。  -->
                 <p th:text="${msg}" style="color: #ff1e21"></p>
             </div>
 
