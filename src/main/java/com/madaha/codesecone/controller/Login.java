@@ -2,6 +2,7 @@ package com.madaha.codesecone.controller;
 
 import com.madaha.codesecone.service.LoginService;
 import com.madaha.codesecone.service.serviceimpl.LoginServiceImpl;
+import com.madaha.codesecone.util.JwtUtils;
 import com.wf.captcha.utils.CaptchaUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.lang.UsesSunMisc;
@@ -21,11 +22,11 @@ import javax.servlet.http.HttpSession;
 public class Login {
 
     /**
-     * 生成 Cookie 键值对，返回前端浏览器存储；
-     * 键值对中存储的 是在每次请求后都会响应变化的 token 。
-     * 但是，由于token太麻烦，耽误太多时间了，这里直接自定义一个字符串
+     * 穿件JWT_Token：
+     *    （1）生成Token，将其存出来HTTP响应头的 Set-Cookie 键值对中，返回前端浏览器存储；
+     *    （2）在每次HTTP请求时，request域中都会带上 Cookies 键值对，存储的 是在每次请求后都会响应变化的 token 。
      */
-//    private static final String COOKIE_NAME = "JWT_TOKEN";
+    private static final String COOKIE_NAME = "JWT_TOKEN";
 
     @Autowired
     LoginService loginService = new LoginServiceImpl();
@@ -67,23 +68,32 @@ public class Login {
          * 注意1：此处验证码逻辑漏洞绕过，后端登录服务，未对每次登录 进行验证码更新；
          */
         if(loginService.loginService(username, password)) {
+
             /**
-             * 创建JWT Token，将其添加到Cookie对象中。
-             * 由于创建JWT Token太麻烦，我这里耽误了太多时间，故此处暂且跳过。
+             * Cookie:JWT_Token;
+             *    (1) 创建JWT Token，并将其添加到Cookie对象中（HTTP请求头中）。
+             *    (2) HTTP Cookie（也叫 Web Cookie 或浏览器 Cookie）是服务器发送到用户浏览器并保存在本地的一小块数据。
+             *    (3) 服务端返回的Set-Cookie会存储在浏览器中，流量器将 cookie 存储，并在下次向 同一服务器 再发起请求时携带并发送到服务器上。
+             *    (4) Cookie用于告知服务端两个请求是否来自同一浏览器——如保持用户的登录状态；Cookie 使基于无状态的 HTTP 协议记录稳定的状态信息成为了可能。
              */
-            String token = JwtUtils.generateToken(username);
+            String token = JwtUtils.generateTokenByJjwt(username);
             Cookie cookie = new Cookie(COOKIE_NAME, token);
 
+            // 在为使用Jwt_Token时，可以使用如下cookie键值对创建方式，
+            // Cookie cookie = new Cookie( "username", username);
 
-            /**
-             * HTTP Cookie（也叫 Web Cookie 或浏览器 Cookie）是服务器发送到用户浏览器并保存在本地的一小块数据。浏览器会存储 cookie 并在下次向同一服务器再发起请求时携带并发送到服务器上。
-             * 通常，它用于告知服务端两个请求是否来自同一浏览器——如保持用户的登录状态。Cookie 使基于无状态的 HTTP 协议记录稳定的状态信息成为了可能。
-             */
-            Cookie cookie = new Cookie( "username", username);
             cookie.setHttpOnly(true);
             cookie.setMaxAge(60 * 60 * 24);     // 此处设置1天时间过期。   如下范例：设置7天过期 (7 * 24 * 60 * 60)
             cookie.setPath("/");
-            response.addCookie(cookie);         //设置cookie对象返回浏览器
+
+
+            /**
+             * 设置cookie对象返回浏览器：
+             *     （1）注意！此处Cookie是否添加信息 都不会影响用户登录验证，因为登录拦截器验证的为是否有session会话信息。
+             *     （2）增加cookie的jwt_token，或者是直接添加username=xxx字段，是为了后端进行权限验证。
+             *     （3）业务操作过程中：第一步是为了user进行登录认证，第二步是基于user角色进行权限校验。（解释：认证和授权的区别！！）
+             */
+            response.addCookie(cookie);
 
 
             /**
@@ -95,7 +105,7 @@ public class Login {
              * 声明：为什么创建session会话“key-value”对？
              *      （1）创建session会话“key-value”对，只要浏览器不关闭，session对象就不会被销毁（注意：是服务器上存活的有效的session对象）；
              *      （2）另一方面，是为了在登录拦截器处理类 “HandlerInterceptor” 中，对session的 “LoginUser” 进行验证；
-             *      （3）当拦截器判断session对象不为null时，放行访问。
+             *      （3）当拦截器判断session对象不为null时，放行访问（通过session会话，确认客户端是否登录）。
              */
             session.setAttribute("LoginUser", username);
 
@@ -116,9 +126,16 @@ public class Login {
      * @return
      */
     @RequestMapping("/user/logout")
-    public String logout(HttpSession session){
+    public String logout(HttpSession session, HttpServletResponse response){
         //注销登录，作废 session 对象
         session.invalidate();
+
+        // 如果用户退出登录了，也应该重置对应的Cookie信息。
+        Cookie cookie = new Cookie(COOKIE_NAME, null);
+        cookie.setMaxAge(0);
+        cookie.setPath("/");
+        response.addCookie(cookie);
+
         return "redirect:/login";
     }
 

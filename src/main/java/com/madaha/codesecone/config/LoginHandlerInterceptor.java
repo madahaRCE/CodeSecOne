@@ -35,6 +35,8 @@ public class LoginHandlerInterceptor implements HandlerInterceptor {
          *    （2）如果session可用 则继续执行逻辑； 如果session不存在 则需要重新登录 来获取session。 （注意：此处只是验证了是否存在可用的session。）
          */
         Object session = request.getSession().getAttribute("LoginUser");
+
+        // 注意！在正常登录过程中，应该对此处的session进行验证；（个人感觉~ 可以通过查询数据库进行验证）
         if (session == null){
             request.setAttribute("msg","请先登录~~");
             request.getRequestDispatcher("/login").forward(request, response);
