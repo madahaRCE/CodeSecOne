@@ -13,10 +13,12 @@ import javax.servlet.http.HttpServletResponse;
  */
 public class LoginHandlerInterceptor implements HandlerInterceptor {
 
+    public static int number_i = 0;
+
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
         // 测试：标注一下，拦截器运行了
-        System.out.println("Interceptor preHandler method is running !");
+        System.out.println("Interceptor preHandler method is running !"  + "  ----  [第：" +   ++number_i   + "次request请求！]");
 
         /**
          * 测试-查看调用过程（Springboot的Interceptor，类似Servlet技术中的Filter）：
@@ -37,17 +39,17 @@ public class LoginHandlerInterceptor implements HandlerInterceptor {
         Object session = request.getSession().getAttribute("LoginUser");
 
         // 注意！在正常登录过程中，应该对此处的session进行验证；（个人感觉~ 可以通过查询数据库进行验证）
-        if (session == null){
-            request.setAttribute("msg","请先登录~~");
-            request.getRequestDispatcher("/login").forward(request, response);
-            return false;
-        }else {
-            return true;
-        }
+//        if (session == null){
+//            request.setAttribute("msg","请先登录~~");
+//            request.getRequestDispatcher("/login").forward(request, response);
+//            return false;
+//        }else {
+//            return true;
+//        }
 
 
         // 如果没有具体实现，仍需要return返回结果，否则就阻断了。
-        // return true;
+         return true;
     }
 
 
