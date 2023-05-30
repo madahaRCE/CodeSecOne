@@ -1,11 +1,10 @@
 package com.madaha.codesecone.controller.filepath;
 
 import com.fasterxml.uuid.Generators;
-import com.madaha.codesecone.util.Security;
+import com.madaha.codesecone.util.SecurityUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -164,7 +163,7 @@ public class UpLoad {
             // 用 contains 是为了防止 text/html;charset=UTF-8 绕过
             // replaceSpecialStr() 将非 <code>0-9a-1/-.<code/> 的字符替换为空
             // 首先获取 MIMETYPT 的value，然后将其字符转换为小写 并替换特殊字符，最后与blackMimeType黑名单进行对比。
-            if (Security.replaceSpecialStr(mimeType).toLowerCase().contains(blackMimeType)){
+            if (SecurityUtils.replaceSpecialStr(mimeType).toLowerCase().contains(blackMimeType)){
                 log.error("[-] Mime type error: " + mimeType);
                 redirectAttributes.addFlashAttribute("message", "以下MIME类型禁止上传：[\"text/html\",\"text/javascript\",\"application/javascript\",\"application/ecmascript\",\"text/xml\",\"application/xml\"]  （不要将该描述返回前端！）");
                 return "redirect:upload";

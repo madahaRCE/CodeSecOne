@@ -1,7 +1,7 @@
 package com.madaha.codesecone.controller.ssrf;
 
 import com.madaha.codesecone.util.HttpClientUtils;
-import com.madaha.codesecone.util.Security;
+import com.madaha.codesecone.util.SecurityUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -45,9 +45,9 @@ public class SSRF {
      */
     @GetMapping("/URLConnection/vul2")
     public String URLConnectionVul2(String url){
-        if(!Security.isHttp(url)){
+        if(!SecurityUtils.isHttp(url)){
             return "不允许非http协议！！！";
-        }else if (Security.isintranet(Security.urltoIp(url))){
+        }else if (SecurityUtils.isintranet(SecurityUtils.urltoIp(url))){
             return "不允许访问内网！！！";
         }else {
             return HttpClientUtils.URLConnection(url);
@@ -59,9 +59,9 @@ public class SSRF {
      */
     @GetMapping("/URLConnection/safe")
     public String URLConnectionSafe(String url){
-        if(!Security.isHttp(url)){
+        if(!SecurityUtils.isHttp(url)){
             return "不允许非http/https协议！！！";
-        } else if (!Security.isWhite(url)){
+        } else if (!SecurityUtils.isWhite(url)){
             return "非可信域名！";
         } else {
             return HttpClientUtils.URLConnection(url);
@@ -78,17 +78,17 @@ public class SSRF {
     public String HTTPURLConnectionSafe(String url){
 
         // 校验 url 是否以 http 或 https 开头
-        if (!Security.isHttp(url)){
+        if (!SecurityUtils.isHttp(url)){
             log.error("[HTTPURLConnection] 非法的 url 协议： " + url);
             return "不允许非http/https协议！！！";
         }
 
         // 解析 url 为 IP 地址
-        String ip = Security.urltoIp(url);
+        String ip = SecurityUtils.urltoIp(url);
         log.info("[HTTPURLConnection] SSRF节日IP: "+ ip);
 
         // 校验 IP 是否为内网地址
-        if(Security.isintranet(ip)){
+        if(SecurityUtils.isintranet(ip)){
             log.error("[HTTPURLConnection] 不允许访问内网：" + ip);
             return "不允许访问内网！！！";
         }

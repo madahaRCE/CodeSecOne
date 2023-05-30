@@ -1,6 +1,6 @@
 package com.madaha.codesecone.controller.filepath;
 
-import com.madaha.codesecone.util.Security;
+import com.madaha.codesecone.util.SecurityUtils;
 import org.apache.commons.codec.binary.Base64;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -8,7 +8,6 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import javax.print.DocFlavor;
 import java.io.File;
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;
@@ -63,7 +62,7 @@ public class FileInclude {
 
     @GetMapping("/sec")
     public String getFileSec(String filepath) throws IOException{
-        if(Security.pathFilter(filepath) == null){
+        if(SecurityUtils.pathFilter(filepath) == null){
             logger.info("Illegal file path: " + filepath);
             return "Bad boy. Illegal file path.";
         }

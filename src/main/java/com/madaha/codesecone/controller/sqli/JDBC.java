@@ -1,6 +1,6 @@
 package com.madaha.codesecone.controller.sqli;
 
-import com.madaha.codesecone.util.Security;
+import com.madaha.codesecone.util.SecurityUtils;
 import org.owasp.esapi.ESAPI;
 import org.owasp.esapi.codecs.Codec;
 import org.owasp.esapi.codecs.OracleCodec;
@@ -213,7 +213,7 @@ public class JDBC {
     @GetMapping("/safe2")
     public String safe2(String id){
 
-        if(!Security.checkSql(id)){
+        if(!SecurityUtils.checkSql(id)){
             StringBuilder result = new StringBuilder();
 
             try{

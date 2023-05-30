@@ -1,5 +1,6 @@
 package com.madaha.codesecone.util;
 
+import com.madaha.codesecone.config.WebConfig;
 import org.apache.commons.lang.text.StrBuilder;
 import org.apache.http.conn.util.InetAddressUtils;
 import org.slf4j.Logger;
@@ -13,16 +14,15 @@ import java.net.URISyntaxException;
 import java.net.URLDecoder;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Locale;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 /**
  * 存放安全类
  */
-public class Security {
+public class SecurityUtils {
 
-    static Logger log = LoggerFactory.getLogger(Security.class);
+    static Logger log = LoggerFactory.getLogger(SecurityUtils.class);
 
     /**
      * 判断是否为内网IP地址
@@ -38,10 +38,11 @@ public class Security {
     }
 
     /**
+     * Determine if the URL starts with HTTP.
      * 判断是否是http类型
      *
-     * @param url
-     * @return
+     * @param url url
+     * @return true or false
      */
     public static boolean isHttp(String url){
         return url.startsWith("http://") || url.startsWith("https://");
@@ -77,6 +78,21 @@ public class Security {
         String host = uri.getHost().toLowerCase();
 
         return url_list.contains(host);
+    }
+
+    /**
+     * Get http url host
+     *
+     * @param url url
+     * @return host
+     */
+    public static String gethost(String url){
+        try {
+            URI uri = new URI(url);
+            return uri.getHost().toLowerCase();
+        } catch (URISyntaxException e) {
+            return "";
+        }
     }
 
     /**
@@ -246,6 +262,61 @@ public class Security {
             }
         }
         return strBuilder.toString();
+    }
+
+    /**
+     * 同时支持一级域名和多级域名，相关配置在resources目录下 “/url/url_safe_domain.xml” 文件。
+     * 优先判断黑名单，如果满足黑名单return null。
+     *
+     * @param url  the url need to check
+     * @return  Safe url returns original url; Illegal url returns null;
+     */
+    public static String checkURL(String url) {
+
+        if (null == url){
+            return null;
+        }
+
+        ArrayList<String> safeDomains = WebConfig.getSafeDomains();
+        ArrayList<String> blockDomains = WebConfig.getBlockDomains();
+
+        try {
+            String host = gethost(url);
+
+            // 必须 http/https
+            if (!isHttp(url)) {
+                return null;
+            }
+
+            // 如果满足黑名单返回null
+            if (blockDomains.contains(host)) {
+                return null;
+            }
+            for (String blockDomain : blockDomains) {
+                if (host.endsWith("." + blockDomain)) {
+                    return null;
+                }
+            }
+
+            // 支持多级域名
+            if (safeDomains.contains(host)) {
+                return url;
+            }
+
+            // 支持多级域名
+            for (String safeDomain : safeDomains) {
+                if (host.endsWith("." + safeDomain)) {
+                    return url;
+                }
+            }
+
+            // 不满足上述条件，直接返回null
+            return null;
+
+        } catch (NullPointerException e) {
+            log.error(e.toString());
+            return null;
+        }
     }
 
 }

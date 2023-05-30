@@ -1,7 +1,6 @@
 package com.madaha.codesecone.controller.rce;
 
-import com.madaha.codesecone.util.Security;
-import org.apache.commons.lang.text.StrBuilder;
+import com.madaha.codesecone.util.SecurityUtils;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -55,7 +54,7 @@ public class ProcessBuilderVul {
     @RequestMapping("/safe")
     public static String processBuliderSafe(String filepath) throws IOException{
 
-        if (!Security.chrckOs(filepath)){
+        if (!SecurityUtils.chrckOs(filepath)){
 
             // String[] cmdList = {"sh", "-c", "ls -l" + filepath};
             String[] cmdList = {"cmd", "/c", "dir" + filepath};

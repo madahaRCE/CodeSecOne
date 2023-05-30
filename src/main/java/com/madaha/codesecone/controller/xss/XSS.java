@@ -1,6 +1,6 @@
 package com.madaha.codesecone.controller.xss;
 
-import com.madaha.codesecone.util.Security;
+import com.madaha.codesecone.util.SecurityUtils;
 import org.apache.commons.lang.StringUtils;
 import org.jsoup.Jsoup;
 import org.jsoup.safety.Whitelist;
@@ -114,7 +114,7 @@ public class XSS {
     @GetMapping("/filter")
     public static String filter(String xss){
         log.info("[safe] xss过滤： " + xss);
-        return Security.filterXss(xss);
+        return SecurityUtils.filterXss(xss);
     }
 
 

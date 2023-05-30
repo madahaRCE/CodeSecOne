@@ -1,6 +1,6 @@
 package com.madaha.codesecone.controller.xxe;
 
-import com.madaha.codesecone.util.Security;
+import com.madaha.codesecone.util.SecurityUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -143,7 +143,7 @@ public class XXE {
     // safe：检查是否包含 ENTITY 外部实体。
     @RequestMapping("/safe")
     public String check(@RequestParam String content){
-        if(!Security.checkXXE(content)){
+        if(!SecurityUtils.checkXXE(content)){
             return "safe";
         } else {
             return "监测到XXE攻击！！";

@@ -1,7 +1,6 @@
 package com.madaha.codesecone.controller.url;
 
-import com.madaha.codesecone.util.Security;
-import org.apache.groovy.json.internal.IO;
+import com.madaha.codesecone.util.SecurityUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
@@ -87,7 +86,7 @@ public class URLRedirect {
     @ResponseBody
     public String safe(String url){
         log.info("[safe] 安全重定向");
-        if (Security.isWhite(url)){
+        if (SecurityUtils.isWhite(url)){
             return "安全域名:" + url;
         } else {
             return "非法重定向域名！！！";
@@ -105,7 +104,7 @@ public class URLRedirect {
     public void safe2(HttpServletRequest request, HttpServletResponse response) throws IOException{
         String url = request.getParameter("url");
 
-        if (Security.isWhite(url)){
+        if (SecurityUtils.isWhite(url)){
            response.sendRedirect(url);
         }
 

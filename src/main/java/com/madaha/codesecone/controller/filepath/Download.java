@@ -1,6 +1,6 @@
 package com.madaha.codesecone.controller.filepath;
 
-import com.madaha.codesecone.util.Security;
+import com.madaha.codesecone.util.SecurityUtils;
 import org.apache.commons.io.IOUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -70,7 +70,7 @@ public class Download {
      */
     @GetMapping("/safe")
     public String safe(String filename){
-        if(!Security.checkTraversal(filename)){
+        if(!SecurityUtils.checkTraversal(filename)){
             String filePath = System.getProperty("user.dir") + "/log" +filename;
             return "安全路径：" + filePath;
         }else{
