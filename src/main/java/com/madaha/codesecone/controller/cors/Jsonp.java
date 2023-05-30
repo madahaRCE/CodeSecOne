@@ -1,5 +1,10 @@
 package com.madaha.codesecone.controller.cors;
 
+import lombok.extern.slf4j.Slf4j;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
+
+
 /**
  * 前端 Jsonp 跨域：
  *
@@ -12,12 +17,15 @@ package com.madaha.codesecone.controller.cors;
  *    （1）同源策略免疫的，有 <img> 的src 、<link> 的 href 还有就是<script>的 src , 那么JSONP 就是利用其中的 <script> 标签的sec 属性实现跨区域请求的。
  *    （2）服务器的响应头是否设置 Access-Control-Allow-Origin 值， 确认是否允许 http://x.x.x.x 的访问，不符合要求 那么浏览器便会将其给拦截。
  */
-
 /**
  * JSONP劫持漏洞，利用
  *    (1)通过JSONP技术可以实现数据的跨域访问，必然会产生安全问题.
  *    (2)如果网站B对网站A的 JSONP 请求没有进行安全检查直接返回数据，则网站B 便存在JSONP 漏洞，网站A 利用 JSONP漏洞 能够获取用户在网站B上的数据。
  */
+
+@Slf4j
+@RestController
+@RequestMapping("/jsonp")
 public class Jsonp {
 
 }
