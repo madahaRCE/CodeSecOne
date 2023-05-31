@@ -1,4 +1,4 @@
-package com.madaha.codesecone.controller.cors_sop;
+package com.madaha.codesecone.controller.sopCors;
 
 import com.madaha.codesecone.config.WebConfig;
 import com.madaha.codesecone.util.JwtUtils;
@@ -6,7 +6,6 @@ import com.madaha.codesecone.util.SecurityUtils;
 import com.madaha.codesecone.util.WebUtils;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.CookieValue;
-import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 

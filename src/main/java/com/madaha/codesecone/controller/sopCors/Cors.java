@@ -1,4 +1,4 @@
-package com.madaha.codesecone.controller.cors_sop;
+package com.madaha.codesecone.controller.sopCors;
 
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
