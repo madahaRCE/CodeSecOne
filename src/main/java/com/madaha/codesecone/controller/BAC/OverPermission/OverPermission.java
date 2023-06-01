@@ -1,4 +1,4 @@
-package com.madaha.codesecone.controller.BAC;
+package com.madaha.codesecone.controller.BAC.OverPermission;
 
 /**
  * 越权访问（Broken Access Control，简称BAC）:

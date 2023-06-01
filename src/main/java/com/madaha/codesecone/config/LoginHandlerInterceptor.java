@@ -18,7 +18,9 @@ public class LoginHandlerInterceptor implements HandlerInterceptor {
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
         // 测试：标注一下，拦截器运行了
-        System.out.println("Interceptor preHandler method is running !"  + "  ----  [第：" +   ++number_i   + "次request请求！]");
+        System.out.println("Interceptor preHandler method is running !" + "  ----  " +
+                "[第：" +  ++number_i  + "次request请求！]" + "  ----  " +
+                request.getRequestURL().toString() );
 
         /**
          * 测试-查看调用过程（Springboot的Interceptor，类似Servlet技术中的Filter）：
