@@ -15,7 +15,7 @@ public class MyBatis {
     private UserMapper userMapper;
 
     /**
-     * @payload http://127.0.0.1:18888/SQLI/MyBatis/vul/id/1%20and%201=1%20#---
+     * @payload http://127.0.0.1:28888/SQLI/MyBatis/vul/id/1%20and%201=1%20#---
      */
     @GetMapping("/vul/id/{id}")
     public List<User> queryById_Vuln(@PathVariable String id){

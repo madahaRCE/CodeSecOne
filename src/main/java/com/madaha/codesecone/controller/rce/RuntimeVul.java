@@ -16,10 +16,10 @@ import java.util.Set;
 public class RuntimeVul {
 
     /**
-     * @poc http://127.0.0.1:28888/RCE/Runtime/val?cmd=calc
+     * @poc http://127.0.0.1:28888/RCE/Runtime/vuln?cmd=calc
      * */
-    @GetMapping("/val")
-    public static String vul(String cmd){
+    @GetMapping("/vuln")
+    public static String vuln(String cmd){
         StringBuilder sb = new StringBuilder();
         String line;
 
