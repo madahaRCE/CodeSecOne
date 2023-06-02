@@ -270,6 +270,7 @@
 <!--            <version>2.1.5.RELEASE</version>-->
 <!--        </dependency>-->
 
+
         <!-- log4j2 漏洞测试。 -->
         <!-- 漏洞适用版本为2.0 <= Apache log4j2 <= 2.14.1，只需检测Java应用是否引入 log4j-api , log4j-core 两个jar -->
         <!-- log4Shell -->
