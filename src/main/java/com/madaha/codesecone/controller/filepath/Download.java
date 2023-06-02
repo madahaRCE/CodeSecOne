@@ -9,9 +9,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.servlet.http.HttpServletResponse;
-import java.io.BufferedInputStream;
-import java.io.IOException;
-import java.io.InputStream;
+import java.io.*;
+import java.net.URLEncoder;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 
@@ -21,15 +20,62 @@ public class Download {
 
     Logger log = LoggerFactory.getLogger(Download.class);
 
+
+    /**
+     * 测试任意文件下载漏洞的工具类 File 是否会过滤，确认不做过滤时，存在漏洞问题。
+     * http://127.0.0.1:28888/Download/vul2?filename=pom.xml
+     * http://127.0.0.1:28888/Download/vul2?filename=../../../../../../../../../../../../../Windows/System32/drivers/etc/hosts
+     */
+    @GetMapping("/vul2")
+    public String download2(String filename, HttpServletResponse response) throws Exception{
+        String realPath = System.getProperty("user.dir");   // 设置下载目录；  C:\Users\ThreatBook\IdeaProjects\CodeSecOne
+
+        if (filename != null) {
+            File file = new File(realPath, filename);       // 设置文件路径；  C:\Users\ThreatBook\IdeaProjects\CodeSecOne\“filename”
+            if (file.exists()) {
+                // 配置文件下载
+                response.setHeader("content-type", "application/octet-stream");
+                response.setContentType("application/octet-stream");
+                // 下载文件能正常显示中文
+                response.setHeader("Content-Disposition", "attachment; filename=" + URLEncoder.encode(file.getName(), "UTF-8"));
+                response.setHeader("Pragma", "No-cache");
+                response.setHeader("Cache-Control", "No-cache");
+                response.setDateHeader("Expires", 0);
+
+                // 实现文件下载
+                byte[] buffer = new byte[1024];
+                FileInputStream fis = null;
+                BufferedInputStream bis = null;
+                try {
+                    fis = new FileInputStream(file);
+                    bis = new BufferedInputStream(fis);
+                    OutputStream os = response.getOutputStream();
+                    int i = bis.read(buffer);
+                    while (i != -1) {
+                        os.write(buffer, 0, i);
+                        i = bis.read(buffer);
+                    }
+                    System.out.println("Download the song successfully!");
+
+                    os.close();
+                    bis.close();
+                    fis.close();
+
+                    return "下载文件成功：" + file.getName();
+                } catch (Exception e){
+                    System.out.println("Download the song failed!");
+                    e.printStackTrace();
+                }
+            }
+        }
+        return "下载错误！！！";
+    }
+
+
     /**
      * @poc1 http://127.0.0.1:28888/Download/vul?filename=../../../../../../../Windows/System32/calc.exe
-     *
-     * @poc2 http://127.0.0.1:28888/Download/vul?filename=/..\..\..\..\..\..\/Windows/System32/drivers/etc/hosts
+     * @poc2 http://127.0.0.1:28888/Download/vul?filename=../../../../../../../Windows/System32/drivers/etc/hosts
      * @poc_编码 http://127.0.0.1:28888/Download/vul?filename=/..%5C..%5C..%5C..%5C..%5C..%5C/Windows/System32/drivers/etc/hosts
-     *
-     * @param filename
-     * @param response
-     * @return
      */
     @GetMapping("/vul")
     public String download(String filename, HttpServletResponse response){
@@ -62,11 +108,9 @@ public class Download {
         }
     }
 
+
     /**
      * @poc http://127.0.0.1:28888/Download/safe?filename=../../../../../../../Windows/System32/calc.exe
-     *
-     * @param filename
-     * @return
      */
     @GetMapping("/safe")
     public String safe(String filename){
@@ -82,7 +126,15 @@ public class Download {
 
 
 
+    public static void test(){
+//        System.out.println(System.getProperty("user.dir"));     // C:\Users\ThreatBook\IdeaProjects\CodeSecOne
+//        File file = new File(System.getProperty("user.dir"), "pom.xml");
+//        System.out.println(file.toString());
+    }
 
+    public static void main(String[] args){
+        test();
+    }
 
 
 }
