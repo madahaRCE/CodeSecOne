@@ -1,6 +1,6 @@
 package com.madaha.codesecone.util;
 
-import com.madaha.codesecone.config.WebConfig;
+import com.madaha.codesecone.config.SafeDomain_JsonpWebConfig;
 import org.apache.commons.lang.text.StrBuilder;
 import org.apache.http.conn.util.InetAddressUtils;
 import org.slf4j.Logger;
@@ -277,8 +277,8 @@ public class SecurityUtils {
             return null;
         }
 
-        ArrayList<String> safeDomains = WebConfig.getSafeDomains();
-        ArrayList<String> blockDomains = WebConfig.getBlockDomains();
+        ArrayList<String> safeDomains = SafeDomain_JsonpWebConfig.getSafeDomains();
+        ArrayList<String> blockDomains = SafeDomain_JsonpWebConfig.getBlockDomains();
 
         try {
             String host = gethost(url);

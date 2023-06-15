@@ -287,6 +287,13 @@
         </dependency>
 
 
+        <!-- 处理json数据 -->
+        <!-- https://mvnrepository.com/artifact/com.alibaba/fastjson -->
+        <dependency>
+            <groupId>com.alibaba</groupId>
+            <artifactId>fastjson</artifactId>
+            <version>1.2.24</version>
+        </dependency>
 
 
 

@@ -2,11 +2,12 @@
 
 <domains>
     <safedomains>
-        <!-- 支持一级域名或多级域名 -->
+        <!-- 支持一级域名或名多级域 -->
         <domain>joychou.com</domain>
         <domain>joychou.org</domain>
         <domain>test.joychou.org</domain>
         <domain>localhost</domain>
+<!--        <domain>127.0.0.1</domain>-->
     </safedomains>
 
     <!-- 支持以及域名或多级域名 -->

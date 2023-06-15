@@ -68,7 +68,7 @@ public class SafeDomainParser {
             logger.error(e.toString());
         }
 
-        WebConfig wc = new WebConfig();
+        SafeDomain_JsonpWebConfig wc = new SafeDomain_JsonpWebConfig();
         wc.setSafeDomains(safeDomains);
         logger.info(safeDomains.toString());
         wc.setBlockDomains(blockDomains);

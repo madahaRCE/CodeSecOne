@@ -1,6 +1,6 @@
 package com.madaha.codesecone.controller.sopCors;
 
-import com.madaha.codesecone.config.WebConfig;
+import com.madaha.codesecone.config.SafeDomain_JsonpWebConfig;
 import com.madaha.codesecone.util.JwtUtils;
 import com.madaha.codesecone.util.SecurityUtils;
 import com.madaha.codesecone.util.WebUtils;
@@ -37,7 +37,7 @@ public class Jsonp {
 
     private static final String COOKIE_NAME = "JWT_TOKEN";
 
-    private String callback = WebConfig.getBusinessCallback();
+    private String callback = SafeDomain_JsonpWebConfig.getBusinessCallback();
 
 
     /**

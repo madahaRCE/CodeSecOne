@@ -55,9 +55,6 @@ public class LoginHandlerInterceptor implements HandlerInterceptor {
     }
 
 
-
-
-
     @Override
     public void postHandle(HttpServletRequest request, HttpServletResponse response, Object handler, ModelAndView modelAndView) throws Exception {
         // 此接口方法暂未使用，此处只是为了先加上，为后续学习做提醒使用
@@ -69,7 +66,13 @@ public class LoginHandlerInterceptor implements HandlerInterceptor {
         // 此接口方法暂未使用，此处只是为了先加上，为后续学习做提醒使用
         HandlerInterceptor.super.afterCompletion(request, response, handler, ex);
     }
+
 }
+
+
+
+
+
 
 /**
  * 在 Spring MVC 框架中定义一个拦截器需要对拦截器进行定义和配置，主要有以下 2 种方式：

@@ -16,7 +16,7 @@ import java.util.ArrayList;
 
 // 注解@Component表明WebConfig类将被SpringIoC容器扫描装配，并且Bean名称为webConfig
 @Component
-public class WebConfig {
+public class SafeDomain_JsonpWebConfig {
 
     private static String businessCallback;
     private static ArrayList<String> safeDomains = new ArrayList<>();
@@ -25,7 +25,7 @@ public class WebConfig {
 
     @Value("${codesecone.business.callback}")
     public void setBusinessCallback(String businessCallback) {
-        WebConfig.businessCallback = businessCallback;
+        SafeDomain_JsonpWebConfig.businessCallback = businessCallback;
     }
 
     public static String getBusinessCallback() {
@@ -33,7 +33,7 @@ public class WebConfig {
     }
 
     void setSafeDomains(ArrayList<String> safeDomains) {
-        WebConfig.safeDomains = safeDomains;
+        SafeDomain_JsonpWebConfig.safeDomains = safeDomains;
     }
 
     public static ArrayList<String> getSafeDomains() {
@@ -41,7 +41,7 @@ public class WebConfig {
     }
 
     void setBlockDomains(ArrayList<String> blockDomains) {
-        WebConfig.blockDomains = blockDomains;
+        SafeDomain_JsonpWebConfig.blockDomains = blockDomains;
     }
 
     public static ArrayList<String> getBlockDomains() {
