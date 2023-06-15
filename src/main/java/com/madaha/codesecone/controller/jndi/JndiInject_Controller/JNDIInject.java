@@ -1,4 +1,4 @@
-package com.madaha.codesecone.controller.jndi.RmiInject_Controller;
+package com.madaha.codesecone.controller.jndi.JndiInject_Controller;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

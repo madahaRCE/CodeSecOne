@@ -1,4 +1,4 @@
-package com.madaha.codesecone.controller.jndi.RmiInject_Controller;
+package com.madaha.codesecone.controller.jndi.JndiInject_Controller;
 
 import com.sun.jndi.rmi.registry.ReferenceWrapper;
 
