@@ -15,6 +15,7 @@ import javax.servlet.http.HttpServletResponse;
 @RequestMapping("/XStreamRCE")
 public class XStream_Vul {
 
+    // poc post  http://127.0.0.1:28888/XStreamRCE/vul
     @RequestMapping("/vul")
     public String parseXML(HttpServletRequest request, HttpServletResponse response) {
         try {
@@ -29,6 +30,6 @@ public class XStream_Vul {
 
     // POCl链接：  https://www.cnblogs.com/NoCirc1e/p/16275607.html
 
-    // POC写再文件里了，因为是使用哦的POST发包触发：
+    // POC写在文件里了，因为是使用哦的POST发包触发：
     // C:\Users\ThreatBook\IdeaProjects\CodeSecOne\src\main\java\com\madaha\codesecone\controller\AdvancedAttack\deserialize\components\Exploit\XStreamEXP.txt
 }
