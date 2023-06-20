@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <title>登录</title>
+</head>
+
+<body>
+<div class="login-page">
+
+    <div style="width: 300px; margin: auto">
+
+        <form th:action="@{/Shiro/serialize/shiroLogin}" method="post">
+
+            <!-- requiresd 属性，规定必需在提交表单之前填写输入字段-->
+            <input type="text" placeholder="用户名" name="account" required="required"/>
+            <input type="password" placeholder="密码" name="password" required="required"/>
+            <p><input type="checkbox" name="rememberMe"/>记住我</p>
+
+            <!-- 表单提交 -->
+            <button type="submit" style="font-size: 20px">登录</button>
+
+        </form>
+
+    </div>
+</div>
+</body>
+
+</html>

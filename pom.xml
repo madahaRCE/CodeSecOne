@@ -97,21 +97,6 @@
         </dependency>
 
 
-<!--  jbcrypt 是 bcrypt 加密工具的 java 实现。 -->
-<!--
-    1、用 jbcrypt 对同一个明文加密后因为 salt 一般不同，加密后的密文一般不同，且bcrypt 是不可逆的加密算法（使用的是Blowfish加密算法），无法通过解密密文得到明文。
-    2、采用hash+salt的方式，使用密码生成salt和hash，并将salt加入到hash里面去，从而使得salt不需要单独保存，同时嫌“MD5”计算速度“太快”，从而加入了反复执行的功能，降低暴力破解的风险。
-    3、由它加密的文件可在所有支持的操作系统和处理器上进行转移。它的口令必须是8至56个字符，并将在内部被转化为448位的密钥。
-    4、bcrypt 和其他对称或非对称加密方式不同的是，不是直接解密得到明文，也不是二次加密比较密文，而是把明文和存储的密文一块运算得到另一个密文，如果这两个密文相同则验证成功。
--->
-<!--  该组件此处的用户登录认证并未使用，待未来哪一天再进行实现吧 -->
-<!--        <dependency>-->
-<!--            <groupId>org.mindrot</groupId>-->
-<!--            <artifactId>jbcrypt</artifactId>-->
-<!--            <version>0.4</version>-->
-<!--        </dependency>-->
-
-
         <!--
             1、由于标准的Java库无法提供用于操纵其核心类的足够方法。Apache Commons Lang提供了这些额外的方法工具。
             2、Lang为java.lang API提供了许多帮助程序实用程序，特别是字符串操作方法，基本数值方法，对象反射，并发，创建和序列化以及系统属性。
@@ -209,17 +194,15 @@
         </dependency>
 
 
-<!-- 在 Apache Commons Collections3.2.1以下，才存在 “Commons Collections1” 的反序列化漏洞问题。 -->
+<!-- 注意：在Apache Commons Collections3.2.1以下，才存在 “Commons Collections1” 的反序列化漏洞问题。 -->
+<!--  （1）Apache Commons Collections官⽅在2015年底得知序列化相关的问题后，就在两个分⽀上同时发布了新的版本，4.1和3.2.2。-->
+<!--  （2）在3.2.2中新版代码中增加了⼀个⽅法FunctorUtils#checkUnsafeSerialization ，⽤于检测反序列化是否安全。如果开发者没有设置全局配置org.apache.commons.collections.enableUnsafeSerialization=true ，即默认情况下会抛出异常。-->
+<!--  （3）在4.1中，这⼏个危险Transformer类不再实现Serializable 接⼝，也就是说，他们⼏个彻底⽆法序列化和反序列化了。-->
 <!--        <dependency>-->
 <!--            <groupId>commons-collections</groupId>-->
 <!--            <artifactId>commons-collections</artifactId>-->
 <!--            <version>3.2.2</version>-->
 <!--        </dependency>-->
-
-<!--        1、Apache Commons Collections官⽅在2015年底得知序列化相关的问题后，就在两个分⽀上同时发布了新的版本，4.1和3.2.2。-->
-<!--        2、在3.2.2中新版代码中增加了⼀个⽅法FunctorUtils#checkUnsafeSerialization ，⽤于检测反序列化是否安全。-->
-<!--           如果开发者没有设置全局配置org.apache.commons.collections.enableUnsafeSerialization=true ，即默认情况下会抛出异常。-->
-<!--        3、在4.1中，这⼏个危险Transformer类不再实现Serializable 接⼝，也就是说，他们⼏个彻底⽆法序列化和反序列化了。-->
 
         <!-- Commons Collections1 反序列化漏洞验证。 -->
         <dependency>
@@ -288,7 +271,7 @@
         </dependency>
 
 
-        <!-- 处理json数据 -->
+        <!-- fastjson反序列化，处理json数据 -->
         <!-- https://mvnrepository.com/artifact/com.alibaba/fastjson -->
         <dependency>
             <groupId>com.alibaba</groupId>
@@ -326,11 +309,6 @@
 
 
         <!-- XStream rce 不通版本对应的poc是不太一样的。 -->
-<!--        <dependency>-->
-<!--            <groupId>com.thoughtworks.xstream</groupId>-->
-<!--            <artifactId>xstream</artifactId>-->
-<!--            <version>1.4.15</version>-->
-<!--        </dependency>-->
         <dependency>
             <groupId>com.thoughtworks.xstream</groupId>
             <artifactId>xstream</artifactId>
@@ -339,8 +317,21 @@
 <!--        <dependency>-->
 <!--            <groupId>com.thoughtworks.xstream</groupId>-->
 <!--            <artifactId>xstream</artifactId>-->
+<!--            <version>1.4.15</version>-->
+<!--        </dependency>-->
+<!--        <dependency>-->
+<!--            <groupId>com.thoughtworks.xstream</groupId>-->
+<!--            <artifactId>xstream</artifactId>-->
 <!--            <version>1.4.10</version>-->
 <!--        </dependency>-->
+
+
+        <!-- shiro rce -->
+        <dependency>
+            <groupId>org.apache.shiro</groupId>
+            <artifactId>shiro-spring</artifactId>
+            <version>1.2.4</version>
+        </dependency>
 
 
 
