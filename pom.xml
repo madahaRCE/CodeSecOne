@@ -10,7 +10,7 @@
         <artifactId>spring-boot-starter-parent</artifactId>
         <!-- <version>2.7.9</version>      // parent-version依赖的thymeleaf不存在spel注入问题，故修改thymeleaf的以来版本。-->
         <version>2.4.1</version>
-        <relativePath/> <!-- lookup parent from repository -->
+        <relativePath/>                    <!-- lookup parent from repository -->
     </parent>
 
     <groupId>com.madaha</groupId>
@@ -27,7 +27,6 @@
 
 
     <dependencies>
-
         <!-- thymeleaf 模板 -->
         <!--SpringBoot 集成 Thymeleaf 的起步依赖-->
         <dependency>
