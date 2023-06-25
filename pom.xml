@@ -312,8 +312,19 @@
             <version>3.27.0-GA</version>
         </dependency>
 
+        <!-- Hessian协议，反序列化漏洞测试 -->
+        <dependency>
+            <groupId>com.caucho</groupId>
+            <artifactId>hessian</artifactId>
+            <version>4.0.63</version>
+        </dependency>
 
-
+        <!-- 攻击依赖于 rome 工具包中的 ToStringBean 工具 -->
+        <dependency>
+            <groupId>com.rometools</groupId>
+            <artifactId>rome</artifactId>
+            <version>1.7.0</version>
+        </dependency>
 
 
 
