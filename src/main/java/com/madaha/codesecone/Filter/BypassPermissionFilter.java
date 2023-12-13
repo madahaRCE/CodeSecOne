@@ -10,7 +10,7 @@ public class BypassPermissionFilter implements Filter {
     /**
      * Tomcat: getRequestURI()方法，存在全校绕过漏洞。
      *
-     * @poc http://10.201.170.88:28888/bypassPermission/api/../admin
+     * @poc http://10.201.170.88:28888/bypassPermission/api/..;/admin
      *
      * @param servletRequest
      * @param servletResponse
