@@ -29,7 +29,7 @@ public class BypassPermission_SpringBoot_No_Exist {
     /**
      * 下均为白名单，测试url
      */
-    @RequestMapping(value = "/api111")
+    @RequestMapping(value = "/api")
     public String api(){
         return "Api Page";
     }

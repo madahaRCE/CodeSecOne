@@ -1,5 +1,7 @@
 package com.madaha.codesecone.entity;
 
+import io.swagger.annotations.ApiModel;
+import io.swagger.annotations.ApiModelProperty;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -14,11 +16,15 @@ import lombok.NoArgsConstructor;
  * @Accessors(chain=true)：让该类的实体类支持链式访问呢。
  */
 
+@ApiModel("用户实体")
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
 public class User {
+    @ApiModelProperty("用户唯一编号ID")
     private Integer id;
+    @ApiModelProperty("用户名")
     private String user;
+    @ApiModelProperty("密码")
     private String pass;
 }

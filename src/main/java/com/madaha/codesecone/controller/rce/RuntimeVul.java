@@ -1,5 +1,10 @@
 package com.madaha.codesecone.controller.rce;
 
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.Parameter;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -11,6 +16,8 @@ import java.io.InputStreamReader;
 import java.util.HashSet;
 import java.util.Set;
 
+//@Api(tags = "命令执行接口测试")
+//@Tag(name = "RuntimeVul-controller", description = "命令执行-用户接口")
 @RestController
 @RequestMapping("/RCE/Runtime")
 public class RuntimeVul {
@@ -18,6 +25,7 @@ public class RuntimeVul {
     /**
      * @poc http://127.0.0.1:28888/RCE/Runtime/vuln?cmd=calc
      * */
+    //@Operation(tags = "getRuntime.exec()命令执行", description = "参数cmd后，直接加要执行的命令")  //swagger3
     @GetMapping("/vuln")
     public static String vuln(String cmd){
         StringBuilder sb = new StringBuilder();
