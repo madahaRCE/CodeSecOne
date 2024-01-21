@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<html lang="zh">
+<!--<html lang="zh" xmlns:th="http://www.thymeleaf.org">-->
+<!--<html lang="en" xmlns:th="http://www.thymeleaf.org">-->
+<head>
+  <meta charset="UTF-8" />
+  <title>amis demo</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <meta
+          name="viewport"
+          content="width=device-width, initial-scale=1, maximum-scale=1"
+  />
+  <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
+  <link rel="stylesheet" href="/amis_sdk/sdk.css" />
+  <link rel="stylesheet" href="/amis_sdk/helper.css" />
+  <link rel="stylesheet" href="/amis_sdk/iconfont.css" />
+  <!-- 这是默认主题所需的，如果是其他主题则不需要 -->
+  <!-- 从 1.1.0 开始 sdk.css 将不支持 IE 11，如果要支持 IE11 请引用这个 css，并把前面那个删了 -->
+  <!-- <link rel="stylesheet" href="sdk-ie11.css" /> -->
+  <!-- 不过 amis 开发团队几乎没测试过 IE 11 下的效果，所以可能有细节功能用不了，如果发现请报 issue -->
+  <style>
+    html,
+    body,
+    .app-wrapper {
+      position: relative;
+      width: 100%;
+      height: 100%;
+      margin: 0;
+      padding: 0;
+    }
+  </style>
+</head>
+<body>
+<div id="root" class="app-wrapper"></div>
+<script src="/amis_sdk/sdk.js"></script>
+<script type="text/javascript">
+  (function () {
+    let amis = amisRequire('amis/embed');
+    // 通过替换下面这个配置来生成不同页面
+    let amisJSON = {
+      "title": "Tabs 示例",
+      "body": [
+        {
+          "type": "form",
+          "mode": "horizontal",
+          "api": "/amis/api/mock2/form/saveForm?waitSeconds=2",
+          "title": "",
+          "actions": [
+            {
+              "type": "button",
+              "actionType": "dialog",
+              "label": "弹框中的 Tabs",
+              "level": "info",
+              "dialog": {
+                "title": "",
+                "body": {
+                  "type": "form",
+                  "mode": "horizontal",
+                  "horizontal": {
+                    "leftFixed": "xs"
+                  },
+                  "api": "/amis/api/mock2/form/saveForm?waitSeconds=2",
+                  "actions": [
+                    {
+                      "type": "submit",
+                      "label": "提交",
+                      "primary": true
+                    }
+                  ],
+                  "body": [
+                    {
+                      "type": "tabs",
+                      "tabs": [
+                        {
+                          "title": "基本信息",
+                          "body": [
+                            {
+                              "type": "group",
+                              "body": [
+                                {
+                                  "type": "input-email",
+                                  "name": "email1",
+                                  "placeholder": "请输入邮箱地址",
+                                  "label": "邮箱"
+                                },
+                                {
+                                  "type": "input-password",
+                                  "name": "password",
+                                  "placeholder": "密码",
+                                  "label": false
+                                }
+                              ]
+                            },
+                            {
+                              "type": "divider"
+                            },
+                            {
+                              "type": "group",
+                              "body": [
+                                {
+                                  "type": "input-email",
+                                  "name": "email2",
+                                  "placeholder": "请输入邮箱地址",
+                                  "label": "邮箱"
+                                },
+                                {
+                                  "type": "checkbox",
+                                  "name": "rememberMe",
+                                  "label": false,
+                                  "option": "记住我"
+                                }
+                              ]
+                            }
+                          ]
+                        },
+                        {
+                          "title": "其他信息",
+                          "body": [
+                            {
+                              "type": "input-email",
+                              "name": "email3",
+                              "placeholder": "请输入邮箱地址",
+                              "label": "邮箱"
+                            },
+                            {
+                              "type": "divider"
+                            },
+                            {
+                              "type": "checkbox",
+                              "name": "rememberMe2",
+                              "option": "记住我"
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                  ]
+                }
+              }
+            },
+            {
+              "type": "submit",
+              "label": "提交",
+              "primary": true
+            }
+          ],
+          "body": [
+            {
+              "type": "tabs",
+              "name": "outertabs",
+              "className": "m-b",
+              "tabs": [
+                {
+                  "title": "基本信息",
+                  "hash": "tab1",
+                  "body": [
+                    {
+                      "type": "group",
+                      "body": [
+                        {
+                          "type": "input-email",
+                          "name": "email",
+                          "placeholder": "请输入邮箱地址",
+                          "label": "邮箱"
+                        },
+                        {
+                          "type": "input-password",
+                          "name": "password",
+                          "placeholder": "密码",
+                          "label": false
+                        }
+                      ]
+                    },
+                    {
+                      "type": "divider"
+                    },
+                    {
+                      "type": "group",
+                      "body": [
+                        {
+                          "type": "input-email",
+                          "name": "email2",
+                          "placeholder": "请输入邮箱地址",
+                          "label": "邮箱"
+                        },
+                        {
+                          "type": "checkbox",
+                          "name": "rememberMe",
+                          "label": false,
+                          "option": "记住我"
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "title": "其他信息",
+                  "hash": "tab2",
+                  "body": [
+                    {
+                      "type": "input-email",
+                      "name": "email3",
+                      "placeholder": "请输入邮箱地址",
+                      "label": "邮箱"
+                    },
+                    {
+                      "type": "divider"
+                    },
+                    {
+                      "type": "checkbox",
+                      "name": "rememberMe4",
+                      "label": "记住我"
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "type": "radios",
+              "name": "outertabs",
+              "label": "Tabs值",
+              "mode": "normal",
+              "description": "如果 tabs 设置了 name 是可以跟表单值联动的，默认并不会开启此功能。",
+              "options": [
+                {
+                  "label": "基本信息",
+                  "value": "基本信息"
+                },
+                {
+                  "label": "其他信息",
+                  "value": "其他信息"
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    };
+    let amisScoped = amis.embed('#root', amisJSON);
+  })();
+</script>
+</body>
+</html>

@@ -34,7 +34,7 @@ public class MvcConfigurer implements WebMvcConfigurer {
     public void addInterceptors(InterceptorRegistry registry) {
         registry.addInterceptor(new LoginHandlerInterceptor())
                 .addPathPatterns("/**")
-                .excludePathPatterns("/captcha", "/login", "/user/login", "/user/ldap", "/img/**", "/css/**","/js/**", "/Unauth/**");
+                .excludePathPatterns("/captcha", "/login", "/user/login", "/user/ldap", "/amis_sdk/**", "/img/**", "/css/**","/js/**", "/Unauth/**");
                 // 使用拦截器“excludePathPatterns”过滤“thymeleaf"静态文件时，设置路径为 “/img/**” 即可，无需加入父路径。 亲测~~
     }
 

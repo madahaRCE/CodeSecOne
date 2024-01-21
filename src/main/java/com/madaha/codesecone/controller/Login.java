@@ -5,7 +5,6 @@ import com.madaha.codesecone.service.serviceimpl.LoginServiceImpl;
 import com.madaha.codesecone.util.JwtUtils;
 import com.wf.captcha.utils.CaptchaUtil;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.lang.UsesSunMisc;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -168,6 +167,11 @@ public class Login {
     public String test(){
         //测试只给前端返回数据
         return "测试，直接返回 字符串对象 的数据";
+    }
+
+    @RequestMapping("/index/amis-hello")
+    public String amis_hello(){
+        return "/amis-hello";
     }
 
 }
