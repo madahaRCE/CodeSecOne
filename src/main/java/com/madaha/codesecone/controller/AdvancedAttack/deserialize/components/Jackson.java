@@ -25,12 +25,30 @@ public class Jackson {
             // mapper.enableDefaultTyping(ObjectMapper.DefaultTyping.NON_FINAL);
             Object o = mapper.readValue(content, Object.class);
             mapper.writeValueAsString(o);
+
+            // String s = mapper.writeValueAsString(o);    //快捷键来自动生成返回值接收变量：   Windows/Linux: Ctrl+Alt+V。
+            // System.out.println(s);      //快捷键来快速打印System.out.println()语句;       输入sout，然后按下Tab键。
+
             return "Jackson RCE";
         } catch (Exception e){
             e.printStackTrace();
             return "Jackson RCE Exception...";
         }
     }
+
+
+    /**
+     * fastjson 使用范例：
+     * url：
+     **/
+
+
+
+
+
+
+
+
 
 
     /**
