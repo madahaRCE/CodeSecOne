@@ -6,6 +6,7 @@ import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -56,6 +57,17 @@ public class RuntimeVul {
         //因为使用 @RestController 注解，所以可以直接返回json数据。
         //return cmd;
     }
+
+
+    //@GetMapping("/vulnJson")
+    @PostMapping("/vulnJson")
+    public String vulnJson(){
+
+        return "{\"last_return_value\": \"hello World! xxxxxxxxxxxxxxx \"}";
+    }
+
+
+
 
     /**
      * @poc http://127.0.0.1:28888/RCE/Runtime/safe?cmd=notepad

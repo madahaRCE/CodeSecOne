@@ -38,204 +38,103 @@
     let amis = amisRequire('amis/embed');
     // 通过替换下面这个配置来生成不同页面
     let amisJSON = {
-      "title": "Tabs 示例",
+      "type": "page",
+      "title": "amis表达提交",
+      // "data": {
+      //   "last_return_value": "hello World!  初始值状态！！！"    // 全局数据域 数值据，这里做测试使用。
+      // },
       "body": [
         {
           "type": "form",
-          "mode": "horizontal",
-          "api": "/amis/api/mock2/form/saveForm?waitSeconds=2",
-          "title": "",
-          "actions": [
-            {
-              "type": "button",
-              "actionType": "dialog",
-              "label": "弹框中的 Tabs",
-              "level": "info",
-              "dialog": {
-                "title": "",
-                "body": {
-                  "type": "form",
-                  "mode": "horizontal",
-                  "horizontal": {
-                    "leftFixed": "xs"
-                  },
-                  "api": "/amis/api/mock2/form/saveForm?waitSeconds=2",
-                  "actions": [
-                    {
-                      "type": "submit",
-                      "label": "提交",
-                      "primary": true
-                    }
-                  ],
-                  "body": [
-                    {
-                      "type": "tabs",
-                      "tabs": [
-                        {
-                          "title": "基本信息",
-                          "body": [
-                            {
-                              "type": "group",
-                              "body": [
-                                {
-                                  "type": "input-email",
-                                  "name": "email1",
-                                  "placeholder": "请输入邮箱地址",
-                                  "label": "邮箱"
-                                },
-                                {
-                                  "type": "input-password",
-                                  "name": "password",
-                                  "placeholder": "密码",
-                                  "label": false
-                                }
-                              ]
-                            },
-                            {
-                              "type": "divider"
-                            },
-                            {
-                              "type": "group",
-                              "body": [
-                                {
-                                  "type": "input-email",
-                                  "name": "email2",
-                                  "placeholder": "请输入邮箱地址",
-                                  "label": "邮箱"
-                                },
-                                {
-                                  "type": "checkbox",
-                                  "name": "rememberMe",
-                                  "label": false,
-                                  "option": "记住我"
-                                }
-                              ]
-                            }
-                          ]
-                        },
-                        {
-                          "title": "其他信息",
-                          "body": [
-                            {
-                              "type": "input-email",
-                              "name": "email3",
-                              "placeholder": "请输入邮箱地址",
-                              "label": "邮箱"
-                            },
-                            {
-                              "type": "divider"
-                            },
-                            {
-                              "type": "checkbox",
-                              "name": "rememberMe2",
-                              "option": "记住我"
-                            }
-                          ]
-                        }
-                      ]
-                    }
-                  ]
-                }
-              }
-            },
-            {
-              "type": "submit",
-              "label": "提交",
-              "primary": true
-            }
-          ],
+          "api": {
+            "method": "post",
+            "url": "/RCE/Runtime/vulnJson",
+          },
+          "title": "测试前后端分离：",
           "body": [
             {
-              "type": "tabs",
-              "name": "outertabs",
-              "className": "m-b",
-              "tabs": [
+              "type": "html",
+              "html": "<p>命令执行功能测试：</p>"
+            },
+            {
+              "type": "input-group",
+              "name": "input-group",
+              "body": [
                 {
-                  "title": "基本信息",
-                  "hash": "tab1",
-                  "body": [
-                    {
-                      "type": "group",
-                      "body": [
-                        {
-                          "type": "input-email",
-                          "name": "email",
-                          "placeholder": "请输入邮箱地址",
-                          "label": "邮箱"
-                        },
-                        {
-                          "type": "input-password",
-                          "name": "password",
-                          "placeholder": "密码",
-                          "label": false
-                        }
-                      ]
-                    },
-                    {
-                      "type": "divider"
-                    },
-                    {
-                      "type": "group",
-                      "body": [
-                        {
-                          "type": "input-email",
-                          "name": "email2",
-                          "placeholder": "请输入邮箱地址",
-                          "label": "邮箱"
-                        },
-                        {
-                          "type": "checkbox",
-                          "name": "rememberMe",
-                          "label": false,
-                          "option": "记住我"
-                        }
-                      ]
-                    }
-                  ]
+                  "type": "input-text",
+                  "name": "cmd",
+                  "placeholder": "输入命令",
                 },
                 {
-                  "title": "其他信息",
-                  "hash": "tab2",
-                  "body": [
-                    {
-                      "type": "input-email",
-                      "name": "email3",
-                      "placeholder": "请输入邮箱地址",
-                      "label": "邮箱"
+                  "type": "submit",
+                  "label": "点击提交 && 移入刷新",
+                  "level": "primary",
+                  "onEvent": {
+                    "mouseenter": {   // 鼠标“点击|移入|移除”，刷新展示数据！！
+                      "actions": [
+                        {
+                          "actionType": "setValue",
+                          "componentId": "service-setValue-test01",
+                          "args": {
+                            "value": {
+                              // "last_return_value_ServicePanel": "hello World! \n onEvent触发后，初始值状态！"     //测试值用。  注意：属性名不能用“-” 只能用“_” ！！
+                              "last_return_value_ServicePanel": "${last_return_value}"
+                            }
+                          }
+                        }
+                      ]
                     },
-                    {
-                      "type": "divider"
-                    },
-                    {
-                      "type": "checkbox",
-                      "name": "rememberMe4",
-                      "label": "记住我"
-                    }
-                  ]
+                    // "click": {   // 鼠标“点击|移入|移除”，刷新展示数据！！
+                    //   "actions": [
+                    //     {
+                    //       "actionType": "setValue",
+                    //       "componentId": "service-setValue-test01",
+                    //       "args": {
+                    //         "value": {
+                    //           // "last_return_value_ServicePanel": "hello World! \n onEvent触发后，初始值状态！"     //测试值用。  注意：属性名不能用“-” 只能用“_” ！！
+                    //           "last_return_value_ServicePanel": "${last_return_value}"
+                    //         }
+                    //       }
+                    //     }
+                    //   ]
+                    // }
+                  }
                 }
               ]
             },
             {
-              "type": "radios",
-              "name": "outertabs",
-              "label": "Tabs值",
-              "mode": "normal",
-              "description": "如果 tabs 设置了 name 是可以跟表单值联动的，默认并不会开启此功能。",
-              "options": [
-                {
-                  "label": "基本信息",
-                  "value": "基本信息"
-                },
-                {
-                  "label": "其他信息",
-                  "value": "其他信息"
-                }
-              ]
+              "type": "divider"
+            },
+            {//占位符。。。。。
+              "type": "static",               // 虽然可以在 form 下动态显示静态数据，但是 name 属性值所写的数据，也会自动体提交到服务端。
+              "name": "last_return_value",    // 如果不想将 name 属性值提交给服务端，那就不能加上 name 属性。但是也就无法动态显示数据了。
+              "label": "返回值是(返回内容-展示类型-一）：",            // 所以，用于将上一次（last）的数据提交给服务端，并且动态form提交和更新数据，最是好用！！！！
+              "placeholder": "返回值展示位置。。。"
+            }
+          ],
+          "actions": []    // 这里是为了让其不显示默认提交按钮！！！
+        },
+        {
+          "type": "service",
+          "name": "service-setValue-test01",   // name 是居于唯一属性
+          "id": "service-setValue-test01",     // id 是全局唯一属性，通常用于日志记录；
+          "data": {
+            // "test-value-1": "test-001",
+            // "last_return_value_ServicePanel": "service-setValue-test01 的初始值状态！！！"   // 注意：属性名不能用“-” 只能用“_” ！！！
+            // 如果 "last_return_value_ServicePanel" 不存在，可以通过 onEven 进行设置添加新的数据域 属性 "last_return_value_ServicePanel"。
+          },
+          "body": [
+            {
+              "type": "panel",
+              "title": "面板标题(返回内容-展示类型-二)",
+              "body": " ${last_return_value_ServicePanel} ",    // 注意：属性名不能用“-” 只能用“_” ！！！
+              "actions": []
             }
           ]
         }
       ]
     };
+
     let amisScoped = amis.embed('#root', amisJSON);
   })();
 </script>
