@@ -1,14 +1,9 @@
 package com.madaha.codesecone.controller.rce;
 
-import io.swagger.annotations.Api;
-import io.swagger.annotations.ApiOperation;
-import io.swagger.v3.oas.annotations.Operation;
-import io.swagger.v3.oas.annotations.Parameter;
-import io.swagger.v3.oas.annotations.tags.Tag;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import com.alibaba.fastjson.JSON;
+import com.alibaba.fastjson.JSONObject;
+import com.madaha.codesecone.entity.CMDJson;
+import org.springframework.web.bind.annotation.*;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -59,13 +54,46 @@ public class RuntimeVul {
     }
 
 
+    /**
+     * 百度amis + 阿里巴巴fastjson + springboot-springMVC：成功实现前后端分分离，通过json进行数据传输、amis前端展示、springboot后端处理！！！
+     * @param param
+     * @return
+     */
     //@GetMapping("/vulnJson")
     @PostMapping("/vulnJson")
-    public String vulnJson(){
+    public String vulnJson(@RequestBody String param){
+        //System.out.println(param);      // {"cmd_json":"calc"}     // 通过 @JSONField(name = "cmd_json") 进行转换；
 
-        return "{\"last_return_value\": \"hello World! xxxxxxxxxxxxxxx \"}";
+        CMDJson cmd_json_object = JSONObject.parseObject(param, CMDJson.class);
+        //System.out.println(cmd_json_object);   // CMDJson(cmd=calc, last_return_value=null)    // 通过 @JSONField(name = "cmd_json") 进行转换；
+        //System.out.println(cmd_json_object.getCmd());
+
+        StringBuilder stringBuilder = new StringBuilder();
+        String line;
+        try {
+            Process process = Runtime.getRuntime().exec(cmd_json_object.getCmd());
+            InputStream inputStream = process.getInputStream();
+            InputStreamReader inputStreamReader = new InputStreamReader(inputStream);
+            BufferedReader bufferedReader = new BufferedReader(inputStreamReader);
+            while ((line = bufferedReader.readLine()) != null) {
+                stringBuilder.append(line);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        //System.out.println("stringBuilder:" + stringBuilder);
+
+        String return_string = stringBuilder.toString();
+        cmd_json_object.setReturnValue(return_string);
+        //System.out.println("return_string" + return_string);
+        //System.out.println(cmd_json_object);
+
+        final String return_json = JSON.toJSONString(cmd_json_object);
+        //System.out.println("return_json: " + return_json);
+
+        // 最终，返回 CMDJson 的 json 对象！！     @即，返回Java的该 pojo 对象的 json 表示！！！
+        return return_json;
     }
-
 
 
 
