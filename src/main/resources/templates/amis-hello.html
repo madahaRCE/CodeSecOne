@@ -111,8 +111,9 @@
             {//占位符。。。。。
               "type": "static",               // 虽然可以在 form 下动态显示静态数据，但是 name 属性值所写的数据，也会自动体提交到服务端。
               "name": "last_return_value",    // 如果不想将 name 属性值提交给服务端，那就不能加上 name 属性。但是也就无法动态显示数据了。
-              "label": "返回值是(返回内容-展示类型-一）：",            // 所以，用于将上一次（last）的数据提交给服务端，并且动态form提交和更新数据，最是好用！！！！
-              "placeholder": "返回值展示位置。。。"
+              "label": "返回值是(返回内容-展示类型-一）：",     // 所以，用于将上一次（last）的数据提交给服务端，并且动态form提交和更新数据，最是好用！！！！
+              "placeholder": "返回值展示位置。。。",
+              "wrapperComponent": "pre"       // 返回结果中有 \n，在页面展现的时候默认不会有换行效果，加上这里就可以了。
             }
           ],
           "actions": []    // 这里是为了让其不显示默认提交按钮！！！
@@ -128,10 +129,17 @@
           },
           "body": [
             {
-              "type": "panel",
-              "title": "面板标题(返回内容-展示类型-二)",
-              "body": " ${last_return_value_ServicePanel} ",    // 注意：属性名不能用“-” 只能用“_” ！！！
-              "actions": []
+              "type": "container",
+              "style": {
+                "white-space": "pre"
+              },
+              "body":
+                {
+                  "type": "panel",
+                  "title": "面板标题(返回内容-展示类型-二)",
+                  "body": " ${last_return_value_ServicePanel} ",    // 注意：属性名不能用“-” 只能用“_” ！！！
+                  "actions": []
+                }
             }
           ]
         }

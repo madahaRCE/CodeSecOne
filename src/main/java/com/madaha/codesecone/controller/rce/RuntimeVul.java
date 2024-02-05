@@ -77,6 +77,7 @@ public class RuntimeVul {
             BufferedReader bufferedReader = new BufferedReader(inputStreamReader);
             while ((line = bufferedReader.readLine()) != null) {
                 stringBuilder.append(line);
+                stringBuilder.append("\n");  //增加一个换行。
             }
         } catch (Exception e) {
             e.printStackTrace();
