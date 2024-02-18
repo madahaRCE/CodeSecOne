@@ -3,6 +3,7 @@ package com.madaha.codesecone.controller.rce;
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
 import com.madaha.codesecone.entity.CMDJson;
+import org.apache.commons.io.IOUtils;
 import org.springframework.web.bind.annotation.*;
 
 import java.io.BufferedReader;
@@ -68,23 +69,41 @@ public class RuntimeVul {
         //System.out.println(cmd_json_object);   // CMDJson(cmd=calc, last_return_value=null)    // 通过 @JSONField(name = "cmd_json") 进行转换；
         //System.out.println(cmd_json_object.getCmd());
 
-        StringBuilder stringBuilder = new StringBuilder();
-        String line;
+    /**
+     * 方式一：没有配置编码，会乱码！！！
+     **/
+//        StringBuilder stringBuilder = new StringBuilder();
+//        String line;
+//        try {
+//            Process process = Runtime.getRuntime().exec(cmd_json_object.getCmd());
+//            InputStream inputStream = process.getInputStream();
+//            //InputStreamReader inputStreamReader = new InputStreamReader(inputStream);
+//            InputStreamReader inputStreamReader = new InputStreamReader(inputStream, "GBK");
+//            BufferedReader bufferedReader = new BufferedReader(inputStreamReader);
+//            while ((line = bufferedReader.readLine()) != null) {
+//                stringBuilder.append(line);
+//                stringBuilder.append("\n");  //增加一个换行。
+//            }
+//        } catch (Exception e) {
+//            e.printStackTrace();
+//        }
+//        //System.out.println("stringBuilder:" + stringBuilder);
+//
+//        String return_string = stringBuilder.toString();
+
+
+    /**
+     * 方式二：没有配置编码，会乱码！！！
+     */
+        String return_string = "default";
         try {
-            Process process = Runtime.getRuntime().exec(cmd_json_object.getCmd());
-            InputStream inputStream = process.getInputStream();
-            InputStreamReader inputStreamReader = new InputStreamReader(inputStream);
-            BufferedReader bufferedReader = new BufferedReader(inputStreamReader);
-            while ((line = bufferedReader.readLine()) != null) {
-                stringBuilder.append(line);
-                stringBuilder.append("\n");  //增加一个换行。
-            }
+            // return_string = IOUtils.toString(Runtime.getRuntime().exec(cmd_json_object.getCmd()).getInputStream(), "UTF-8");
+            return_string = IOUtils.toString(Runtime.getRuntime().exec(cmd_json_object.getCmd()).getInputStream(), "GBK");  //这样设置，可以正常解析中文字符！
         } catch (Exception e) {
             e.printStackTrace();
         }
-        //System.out.println("stringBuilder:" + stringBuilder);
 
-        String return_string = stringBuilder.toString();
+
         cmd_json_object.setReturnValue(return_string);
         //System.out.println("return_string" + return_string);
         //System.out.println(cmd_json_object);
