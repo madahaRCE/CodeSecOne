@@ -139,12 +139,24 @@
             <artifactId>unboundid-ldapsdk</artifactId>
         </dependency>
 
+
+
         <!-- Fastjson 1.2.24存在rce漏洞 -->
         <dependency>
             <groupId>com.alibaba</groupId>
             <artifactId>fastjson</artifactId>
             <version>1.2.41</version>
         </dependency>
+
+        <!-- fastjson反序列化，处理json数据 -->
+        <!-- https://mvnrepository.com/artifact/com.alibaba/fastjson -->
+        <dependency>
+            <groupId>com.alibaba</groupId>
+            <artifactId>fastjson</artifactId>
+            <version>1.2.24</version>
+        </dependency>
+
+
 
         <!-- StringEscapeUtils.escapeXml10() 是 Apache Commons Lang 库中的一个方法，该方法会将字符串中的 &、<、>、' 和 " 转换为实体引用，以便安全地在 XML 文档中使用这些字符。 -->
         <dependency>
@@ -251,15 +263,6 @@
         </dependency>
 
 
-        <!-- fastjson反序列化，处理json数据 -->
-        <!-- https://mvnrepository.com/artifact/com.alibaba/fastjson -->
-        <dependency>
-            <groupId>com.alibaba</groupId>
-            <artifactId>fastjson</artifactId>
-            <version>1.2.24</version>
-        </dependency>
-
-
         <!-- Jackson 引入低版本会报错 -->
         <!-- Springboot 会启动报错！！ -->
         <dependency>
@@ -331,6 +334,14 @@
             <groupId>io.springfox</groupId>
             <artifactId>springfox-boot-starter</artifactId>
             <version>3.0.0</version>
+        </dependency>
+
+
+        <!-- JXPath Library (CVE-2022-41852) -->
+        <dependency>
+            <groupId>commons-jxpath</groupId>
+            <artifactId>commons-jxpath</artifactId>
+            <version>1.3</version>
         </dependency>
 
 
