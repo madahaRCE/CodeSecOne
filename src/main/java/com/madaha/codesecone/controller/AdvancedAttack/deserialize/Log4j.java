@@ -1,4 +1,4 @@
-package com.madaha.codesecone.controller.AdvancedAttack.deserialize.components;
+package com.madaha.codesecone.controller.AdvancedAttack.deserialize;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;

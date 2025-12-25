@@ -329,6 +329,14 @@
             <version>1.7.0</version>
         </dependency>
 
+        <!-- ROME 是一个可以兼容多种格式的 feeds 解析器，可以从一种格式转换成另一种格式，也可返回指定格式或 Java 对象。ROME 兼容了 RSS (0.90, 0.91, 0.92, 0.93, 0.94, 1.0, 2.0), Atom 0.3 以及 Atom 1.0 feeds 格式。 -->
+        <!-- 高版本没法利用，这里找个地板版测试-->
+<!--        <dependency>-->
+<!--            <groupId>rome</groupId>-->
+<!--            <artifactId>rome</artifactId>-->
+<!--            <version>1.0</version>-->
+<!--        </dependency>-->
+
         <!-- SpringBoot集成swagger3，OAS是OpenAPI Specification的简称。 -->
         <dependency>
             <groupId>io.springfox</groupId>

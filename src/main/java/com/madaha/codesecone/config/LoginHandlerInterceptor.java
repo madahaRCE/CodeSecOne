@@ -40,7 +40,13 @@ public class LoginHandlerInterceptor implements HandlerInterceptor {
          */
         Object session = request.getSession().getAttribute("LoginUser");
 
+
         // 注意！在正常登录过程中，应该对此处的session进行验证；（个人感觉~ 可以通过查询数据库进行验证）
+        /**
+         *  配置登录 ”用户名/密码“ 的类在：com.madaha.codesecone.service.serviceimpl.LoginServiceImpl.loginService() 方法；
+         *  用户名：admin
+         *  密码：123456
+        */
 //        if (session == null){
 //            request.setAttribute("msg","请先登录~~");
 //            request.getRequestDispatcher("/login").forward(request, response);

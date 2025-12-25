@@ -1,4 +1,4 @@
-package com.madaha.codesecone.controller.AdvancedAttack.deserialize.components;
+package com.madaha.codesecone.controller.AdvancedAttack.deserialize.HessianDeserialize;
 
 import com.caucho.hessian.io.HessianInput;
 import com.caucho.hessian.io.HessianOutput;

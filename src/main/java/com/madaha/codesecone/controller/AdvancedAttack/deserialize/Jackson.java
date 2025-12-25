@@ -1,4 +1,4 @@
-package com.madaha.codesecone.controller.AdvancedAttack.deserialize.components;
+package com.madaha.codesecone.controller.AdvancedAttack.deserialize;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.web.bind.annotation.RequestBody;

@@ -1,4 +1,4 @@
-package com.madaha.codesecone.controller.AdvancedAttack.deserialize.components;
+package com.madaha.codesecone.controller.AdvancedAttack.deserialize;
 
 import com.madaha.codesecone.util.WebUtils;
 import com.thoughtworks.xstream.XStream;
@@ -31,5 +31,5 @@ public class XStream_Vul {
     // POCl链接：  https://www.cnblogs.com/NoCirc1e/p/16275607.html
 
     // POC写在文件里了，因为是使用哦的POST发包触发：
-    // C:\Users\ThreatBook\IdeaProjects\CodeSecOne\src\main\java\com\madaha\codesecone\controller\AdvancedAttack\deserialize\components\Exploit\XStreamEXP.txt
+    // C:\Users\ThreatBook\IdeaProjects\CodeSecOne\src\main\java\com\madaha\codesecone\controller\AdvancedAttack\deserialize\Exploit\XStreamEXP.txt
 }

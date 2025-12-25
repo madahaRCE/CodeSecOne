@@ -1,4 +1,4 @@
-package com.madaha.codesecone.controller.AdvancedAttack.deserialize.components;
+package com.madaha.codesecone.controller.AdvancedAttack.deserialize;
 
 
 import org.apache.shiro.SecurityUtils;
@@ -54,11 +54,11 @@ public class Shiro {
      *      java -jar ysoserial-all.jar ysoserial.exploit.JRMPListener 1234 CommonsCollections5 "calc"
      *
      * 3、运行脚本，使恶意的反序列化数据进行AES加密，并使用Base64进行编码。
-     *      package com.madaha.codesecone.controller.AdvancedAttack.deserialize.components.Exploit.CreateClassByteCodeToBase64_Shiro#main();
+     *      package com.madaha.codesecone.controller.AdvancedAttack.deserialize.Exploit.CreateClassByteCodeToBase64_Shiro#main();
      *
      * 4、最后，使用burp进行发包。
      *      成功弹出 calc.exe
-     *      package com.madaha.codesecone.controller.AdvancedAttack.deserialize.components.Exploit.ShiroEXP.txt
+     *      package com.madaha.codesecone.controller.AdvancedAttack.deserialize.Exploit.ShiroEXP.txt
      */
     @PostMapping(value = "/serialize/shiroLogin")
     @ResponseBody
