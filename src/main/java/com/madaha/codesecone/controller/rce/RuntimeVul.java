@@ -93,7 +93,7 @@ public class RuntimeVul {
 
 
     /**
-     * 方式二：没有配置编码，会乱码！！！
+     * 方式二：若没有配置编码，会乱码，此处已配置编码！！！
      */
         String return_string = "default";
         try {

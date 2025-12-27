@@ -169,9 +169,9 @@ public class Login {
         return "测试，直接返回 字符串对象 的数据";
     }
 
-    @RequestMapping("/index/amis-hello")
+    @RequestMapping("/amis-rce-page")
     public String amis_hello(){
-        return "/amis-hello";
+        return "amis-rce-page";
     }
 
 }

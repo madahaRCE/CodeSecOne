@@ -1,5 +1,6 @@
 package com.madaha.codesecone.controller.BAC.BypassPermission;
 
+import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import javax.servlet.http.HttpServletRequest;
 
@@ -14,7 +15,7 @@ import javax.servlet.http.HttpServletRequest;
  * @poc http://127.0.0.1:28888/bypassPermission/api/..;/admin
  */
 
-// @RestController
+@Controller
 @RequestMapping("/bypassPermission")
 public class BypassPermission_SpringBoot_No_Exist {
 
