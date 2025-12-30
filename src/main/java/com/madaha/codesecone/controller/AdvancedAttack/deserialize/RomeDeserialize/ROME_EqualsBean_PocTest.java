@@ -16,7 +16,7 @@ import java.util.HashMap;
 
 
 //@SuppressWarnings("all")
-public class ROME_PocTest {
+public class ROME_EqualsBean_PocTest {
 
     // 获取项目根目录，设置expPath;
     private static String projectRoot = System.getProperty("user.dir");
