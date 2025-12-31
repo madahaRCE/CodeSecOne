@@ -41,6 +41,17 @@ public class ROME_ObjectBean_PocTest {
         return objectInputStream.readObject();
     }
 
+    /**
+     *  * TemplatesImpl.getOutputProperties()
+     *  * ToStringBean.toString(String)
+     *  * ToStringBean.toString()
+     *  * EqualsBean.beanHashCode()
+     *  * ObjectBean.hashcode()
+     *  * HashMap<K,V>.hash(Object)
+     *  * HashMap<K,V>.readObject(ObjectInputStream)
+     *
+     * @throws Exception
+     */
 
     public static void rome_ObjectBean_Poc() throws Exception {
         TemplatesImpl templatesimpl = new TemplatesImpl();
